@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carta para Karina · Jardín Vertical</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=EB+Garamond:ital,wght@0,400;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #f3ecf5;
+    --bg-warm: #e9dfef;
+    --plum: #3d1e4f;
+    --plum-deep: #2a1239;
+    --mauve: #7a4d94;
+    --lilac: #b085c7;
+    --lilac-soft: #d4b8e2;
+    --cream: #faf4ed;
+    --ink: #2a1239;
+    --ink-soft: #5a3d6e;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'EB Garamond', serif;
+    overflow-x: hidden;
+  }
+
+  .nav{
+    position: fixed; top: 20px; left: 20px; z-index: 40;
+    font-family: 'EB Garamond', serif;
+    font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--plum);
+  }
+  .nav a{
+    color: inherit; text-decoration: none;
+    padding: 8px 14px;
+    border: 1px solid rgba(61, 30, 79, 0.2);
+    background: rgba(250, 244, 237, 0.8);
+    backdrop-filter: blur(6px);
+    transition: all .3s;
+  }
+  .nav a:hover{ background: var(--plum); color: var(--cream); border-color: var(--plum); }
+
+  .progress{
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: rgba(61, 30, 79, 0.08);
+    z-index: 35;
+  }
+  .progress .bar{
+    height: 100%;
+    background: linear-gradient(90deg, var(--lilac), var(--plum));
+    width: 0;
+    transition: width .1s linear;
+  }
+
+  section{
+    padding: 120px 80px;
+    position: relative;
+  }
+
+  /* ======= HERO ======= */
+  .hero{
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    background:
+      radial-gradient(ellipse at 80% 20%, rgba(176, 133, 199, 0.25) 0%, transparent 50%),
+      linear-gradient(180deg, #f3ecf5 0%, #e9dfef 100%);
+    padding-top: 80px;
+  }
+  .hero-text .kicker{
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 15px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--mauve);
+    margin-bottom: 32px;
+    display:flex; align-items:center; gap: 16px;
+  }
+  .hero-text .kicker::before{
+    content:""; width: 48px; height: 1px; background: var(--mauve);
+  }
+  .hero-text h1{
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(72px, 10vw, 160px);
+    line-height: 0.9;
+    color: var(--plum-deep);
+    letter-spacing: -0.03em;
+    margin-bottom: 24px;
+  }
+  .hero-text h1 em{
+    font-family: 'Pinyon Script', cursive;
+    font-style: normal;
+    font-size: 0.85em;
+    color: var(--mauve);
+    display: block;
+    line-height: 1;
+    margin-top: 12px;
+    font-weight: 400;
+  }
+  .hero-text .lede{
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 1.4;
+    color: var(--ink-soft);
+    max-width: 520px;
+    margin-top: 32px;
+  }
+  .hero-text .scroll-hint{
+    margin-top: 60px;
+    font-size: 12px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--mauve);
+    display:flex; align-items:center; gap: 12px;
+  }
+  .hero-text .scroll-hint .line{
+    width: 60px; height: 1px; background: var(--mauve);
+    animation: growLine 2.5s ease-in-out infinite;
+    transform-origin: left;
+  }
+  @keyframes growLine{
+    0%, 100%{ transform: scaleX(0.3); }
+    50%{ transform: scaleX(1); }
+  }
+
+  .hero-image{
+    position: relative;
+    aspect-ratio: 1956 / 2120;
+    background: #d4b8e2 center/cover no-repeat url('../shared/nosotros.png');
+    border-radius: 2px;
+    box-shadow:
+      0 40px 80px rgba(61, 30, 79, 0.25),
+      0 0 0 1px rgba(61, 30, 79, 0.1);
+    overflow: hidden;
+  }
+  .hero-image::after{
+    content:"";
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 180px; height: 180px;
+    border: 1px solid var(--mauve);
+    border-radius: 50%;
+    opacity: 0.5;
+  }
+
+  /* ======= SECTION header ======= */
+  .section-num{
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--mauve);
+    margin-bottom: 16px;
+  }
+
+  /* ======= CHAPTER 1 ======= */
+  .chapter-01{
+    background: var(--cream);
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .chapter-01 .left{
+    position: sticky;
+    top: 120px;
+  }
+  .pullquote{
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 1.05;
+    color: var(--plum-deep);
+    letter-spacing: -0.02em;
+  }
+  .pullquote em{
+    font-style: italic;
+    color: var(--mauve);
+  }
+  .pullquote::before{
+    content:"“";
+    font-size: 140px;
+    color: var(--lilac);
+    line-height: 0;
+    display: block;
+    height: 60px;
+    margin-bottom: 10px;
+  }
+
+  .long-prose p{
+    font-family: 'EB Garamond', serif;
+    font-size: 20px;
+    line-height: 1.8;
+    margin-bottom: 22px;
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+  .long-prose p em{ color: var(--mauve); font-style: italic; }
+  .long-prose p strong{ color: var(--plum-deep); font-weight: 500; }
+  .long-prose p:first-child::first-letter{
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 82px;
+    float: left;
+    line-height: 0.85;
+    margin: 8px 12px 0 0;
+    color: var(--mauve);
+  }
+
+  /* ======= BANNER IMAGE (full-bleed) ======= */
+  .banner{
+    padding: 0;
+    height: 70vh;
+    min-height: 500px;
+    background:
+      linear-gradient(180deg, rgba(42,18,57,0.55), rgba(42,18,57,0.25)),
+      repeating-linear-gradient(
+        30deg,
+        #7a4d94 0 24px,
+        #61377a 24px 48px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .banner .placeholder-tag{
+    position: absolute;
+    top: 28px; left: 28px;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--cream);
+    background: rgba(42, 18, 57, 0.7);
+    padding: 6px 12px;
+  }
+  .banner blockquote{
+    max-width: 900px;
+    text-align: center;
+    padding: 0 40px;
+    color: var(--cream);
+  }
+  .banner blockquote .q{
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(36px, 5vw, 72px);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin-bottom: 28px;
+  }
+  .banner blockquote .c{
+    font-size: 13px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--lilac-soft);
+  }
+
+  /* ======= CHAPTER 2 ======= */
+  .chapter-02{
+    background: var(--bg);
+  }
+  .chapter-02 .inner{
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 40px;
+    align-items: start;
+  }
+  .chapter-02 h2{
+    grid-column: 1 / 8;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 96px;
+    line-height: 0.95;
+    color: var(--plum-deep);
+    letter-spacing: -0.03em;
+    margin-bottom: 60px;
+  }
+  .chapter-02 h2 em{ font-style: italic; color: var(--mauve); }
+  .chapter-02 .meta{
+    grid-column: 9 / 13;
+    padding-top: 20px;
+  }
+  .chapter-02 .meta .num{
+    font-family: 'Pinyon Script', cursive;
+    font-size: 120px;
+    line-height: 0.8;
+    color: var(--lilac);
+  }
+  .chapter-02 .body{
+    grid-column: 2 / 10;
+  }
+  .chapter-02 .body p{
+    font-size: 21px;
+    line-height: 1.75;
+    margin-bottom: 22px;
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+  .chapter-02 .body p em{ color: var(--mauve); font-style: italic; }
+  .chapter-02 .body p strong{ color: var(--plum-deep); font-weight: 500; }
+
+  .names{
+    grid-column: 1 / 13;
+    margin-top: 48px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(61, 30, 79, 0.15);
+    display: flex;
+    gap: 48px;
+    flex-wrap: wrap;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 24px;
+    color: var(--mauve);
+  }
+  .names span::before{ content:"·  "; color: var(--lilac); }
+
+  /* ======= CHAPTER 3: Vuela ======= */
+  .chapter-03{
+    background: linear-gradient(180deg, #2a1239 0%, #1a0925 100%);
+    color: var(--cream);
+    text-align: center;
+    padding: 160px 80px;
+  }
+  .chapter-03 .section-num{ color: var(--lilac); }
+  .chapter-03 h2{
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(80px, 12vw, 200px);
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    color: var(--cream);
+    margin-bottom: 40px;
+  }
+  .chapter-03 h2 em{
+    font-family: 'Pinyon Script', cursive;
+    font-style: normal;
+    color: var(--lilac);
+    font-size: 0.7em;
+    display: block;
+    line-height: 0.9;
+    margin-top: 12px;
+    font-weight: 400;
+  }
+  .chapter-03 .body{
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .chapter-03 .body p{
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 28px;
+    line-height: 1.5;
+    margin-bottom: 28px;
+    color: var(--lilac-soft);
+  }
+  .virtues{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px 48px;
+    justify-content: center;
+    margin-top: 56px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(176, 133, 199, 0.3);
+  }
+  .virtues span{
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 28px;
+    color: var(--cream);
+    letter-spacing: 0.02em;
+  }
+
+  /* ======= SIGNATURE ======= */
+  .signoff{
+    background: var(--cream);
+    padding: 180px 80px 140px;
+    text-align: center;
+  }
+  .signoff .kicker{
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 15px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--mauve);
+    margin-bottom: 40px;
+  }
+  .signoff .closing-line{
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 56px;
+    line-height: 1.2;
+    color: var(--plum-deep);
+    margin-bottom: 48px;
+    letter-spacing: -0.01em;
+  }
+  .signoff .big-name{
+    font-family: 'Pinyon Script', cursive;
+    font-size: clamp(140px, 22vw, 280px);
+    line-height: 0.8;
+    color: var(--mauve);
+    display: inline-block;
+    transform: rotate(-4deg);
+    text-shadow: 0 2px 0 rgba(61, 30, 79, 0.05);
+  }
+  .signoff .forever{
+    margin-top: 40px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 22px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--plum);
+  }
+  .signoff .ornament{
+    margin-top: 80px;
+    color: var(--lilac);
+    font-size: 20px;
+    letter-spacing: 1.2em;
+  }
+
+  /* ======= Reveal on scroll ======= */
+  .reveal{
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 1s ease, transform 1s ease;
+  }
+  .reveal.in{ opacity: 1; transform: none; }
+
+  @media (max-width: 900px){
+    section{ padding: 80px 28px; }
+    .hero{ grid-template-columns: 1fr; padding-top: 80px; }
+    .hero-image{ max-width: 400px; margin: 0 auto; }
+    .chapter-01{ grid-template-columns: 1fr; gap: 40px; }
+    .chapter-01 .left{ position: static; }
+    .pullquote{ font-size: 42px; }
+    .chapter-02 .inner{ grid-template-columns: 1fr; }
+    .chapter-02 h2, .chapter-02 .meta, .chapter-02 .body, .names{ grid-column: 1/-1; }
+    .chapter-02 h2{ font-size: 54px; }
+    .chapter-02 .meta .num{ font-size: 80px; }
+    .signoff{ padding: 100px 28px; }
+    .signoff .closing-line{ font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="nav"><a href="../index.html">← Volver</a></div>
+<div class="progress"><div class="bar" id="progressBar"></div></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="kicker reveal">Una carta · abril de 2026</div>
+    <h1 class="reveal">Para ti, <em>Karina</em></h1>
+    <p class="lede reveal">Amada mía, amor mío, dueña de mi corazón — estas palabras son pequeñas al lado de todo lo que eres, pero son tuyas.</p>
+    <div class="scroll-hint reveal"><span class="line"></span> Desplázate</div>
+  </div>
+  <div class="hero-image reveal" role="img" aria-label="Nosotros"></div>
+</section>
+
+<!-- CAPÍTULO 1 -->
+<section class="chapter-01">
+  <div class="left reveal">
+    <div class="section-num">Capítulo Uno</div>
+    <div class="pullquote">Te has ganado <em>mi respeto</em> y admiración y tienes toda mi atención.</div>
+  </div>
+  <div class="long-prose reveal">
+    <p>Eres tú la razón por la que me esfuerzo cada día; por ti trabajo incansablemente, porque mi mayor deseo en esta vida es <em>hacerte feliz</em>.</p>
+    <p>A tu lado he aprendido el verdadero significado del amor. Me has enseñado, con tu propio ejemplo, que <strong>el amor es sacrificial</strong>. Veo tu entrega a diario; sé que, a pesar de tu dolor de espalda, sigues adelante sin rendirte.</p>
+    <p>No te quejas, sino que, aun en medio de tu malestar, eres capaz de regalar tu sonrisa y servir a los demás. Eso, mi amor, es un <em>nivel de amor superior</em>.</p>
+    <p>Hemos atravesado tantas pruebas juntos, y en cada batalla has demostrado ser mi <strong>compañera guerrera</strong>. Me siento profundamente orgulloso de ti. Mi anhelo es verte brillar y destacar en todo lo que haces.</p>
+  </div>
+</section>
+
+<!-- BANNER: verso -->
+<section class="banner reveal">
+  <span class="placeholder-tag">imagen · bienvenido jardín</span>
+  <blockquote>
+    <div class="q">«Toda tú eres hermosa, amada mía,<br>y en ti no hay mancha.»</div>
+    <div class="c">Cantares 4:7</div>
+  </blockquote>
+</section>
+
+<!-- CAPÍTULO 2 -->
+<section class="chapter-02">
+  <div class="inner">
+    <h2 class="reveal">Eres mi <em>bendición</em> más grande.</h2>
+    <div class="meta reveal">
+      <div class="section-num">Capítulo Dos</div>
+      <div class="num">II</div>
+    </div>
+    <div class="body reveal">
+      <p>Veo con gran admiración tu crecimiento en el <strong>escuadrón de oración</strong>, y me encanta que seas un instrumento tan hermoso en las manos del Señor. Sé que a veces te preocupas por mi, pero confía: Dios, en Su tiempo perfecto, me pondrá también dentro del equipo.</p>
+      <p>Tu nivel de entrega te capacita para ser un instrumento de gracia cada vez mayor. Lo eres para todas las personas a las que sirves y ministras con ese corazón tan entregado.</p>
+      <p>Me sigues enseñando a amar al ver cómo te entregas sin pensar en el beneficio propio, sino en el de los demás. Admiro cómo te despojas de ti misma para bendecir a otros; eres capaz de hacerles un bien que quizás nunca recibas de vuelta. Eso es <em>amor incondicional puro</em>.</p>
+      <p>Reconozco, con inmensa gratitud, que de todo ese amor que Dios ha puesto en tu corazón, <strong>yo soy el mayor beneficiado</strong>.</p>
+    </div>
+    <div class="names reveal">
+      <span>Dayana</span>
+      <span>Naomi</span>
+      <span>y tantas otras a quienes bendices</span>
+    </div>
+  </div>
+</section>
+
+<!-- CAPÍTULO 3 -->
+<section class="chapter-03">
+  <div class="section-num reveal">Capítulo Tres · Mi compromiso</div>
+  <h2 class="reveal">Vuela, <em>amada mía</em></h2>
+  <div class="body">
+    <p class="reveal">Extiende tus alas sobre los montes y deja que el mundo vea la semilla que fue sembrada, que murió a sí misma para llevar mucho fruto.</p>
+    <p class="reveal">Sigamos luchando juntos. Veo cada vez más cerca el tiempo de avivamiento y mi mayor esperanza es que sigas aquí para mí, así como yo estaré siempre para ti.</p>
+    <p class="reveal" style="color: var(--cream); font-style: normal; font-size: 32px;">Mi compromiso inquebrantable es amarte hasta el final, y amarte con pasión.</p>
+  </div>
+  <div class="virtues reveal">
+    <span>palabra</span>
+    <span>conducta</span>
+    <span>amor</span>
+    <span>espíritu</span>
+    <span>fe</span>
+    <span>pureza</span>
+  </div>
+</section>
+
+<!-- SIGNOFF -->
+<section class="signoff">
+  <div class="kicker reveal">Tuyo, hasta el final</div>
+  <div class="closing-line reveal">Te amo <em style="font-style:italic; color:var(--mauve)">por siempre</em>,</div>
+  <div class="big-name reveal">Esdras</div>
+  <div class="forever reveal">— sigue brillando, mi amor —</div>
+  <div class="ornament reveal">· ❦ ·</div>
+</section>
+
+<script src="../shared/petals.js"></script>
+<script>
+  createPetals({
+    count: 20,
+    colors: ['#b085c7', '#d4b8e2', '#7a4d94', '#e9dfef'],
+    zIndex: 3
+  });
+
+  // progress bar
+  const bar = document.getElementById('progressBar');
+  function updateProgress(){
+    const h = document.documentElement;
+    const scrolled = h.scrollTop / (h.scrollHeight - h.clientHeight);
+    bar.style.width = (scrolled * 100) + '%';
+  }
+  window.addEventListener('scroll', updateProgress, {passive:true});
+  updateProgress();
+
+  // reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>

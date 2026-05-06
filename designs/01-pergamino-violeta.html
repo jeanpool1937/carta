@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carta para Karina · Pergamino Violeta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink: #2a1a3a;
+    --ink-soft: #4a3358;
+    --paper: #f7f0e8;
+    --paper-warm: #efe4d6;
+    --violet: #6b3a8a;
+    --violet-deep: #4a2566;
+    --violet-soft: #b99ac9;
+    --gold: #b89a5e;
+    --rule: rgba(74, 37, 102, 0.18);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background: var(--paper);}
+  body{
+    font-family: 'EB Garamond', 'Cormorant Garamond', serif;
+    color: var(--ink);
+    font-size: 19px;
+    line-height: 1.75;
+    background:
+      radial-gradient(ellipse at top, #f9f2ea 0%, #ede0d0 55%, #d8c3b0 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    padding: 60px 24px 120px;
+  }
+
+  /* paper texture overlay */
+  body::before{
+    content:"";
+    position: fixed; inset: 0;
+    pointer-events: none;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(107, 58, 138, 0.04) 0 2px, transparent 2px),
+      radial-gradient(circle at 80% 70%, rgba(107, 58, 138, 0.05) 0 1.5px, transparent 1.5px),
+      radial-gradient(circle at 50% 50%, rgba(184, 154, 94, 0.03) 0 1px, transparent 1px);
+    background-size: 140px 140px, 90px 90px, 60px 60px;
+    opacity: .7;
+    z-index: 2;
+    mix-blend-mode: multiply;
+  }
+
+  .envelope{
+    max-width: 760px;
+    margin: 0 auto 56px;
+    position: relative;
+    z-index: 10;
+    text-align: center;
+  }
+
+  .envelope .wax{
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 24px;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 35% 30%, #8a4cac 0%, #5a2578 55%, #3a1655 100%);
+    box-shadow:
+      inset -6px -10px 18px rgba(0,0,0,0.35),
+      inset 6px 8px 14px rgba(255,255,255,0.12),
+      0 10px 30px rgba(74, 37, 102, 0.35);
+    display:flex; align-items:center; justify-content:center;
+    font-family: 'Pinyon Script', cursive;
+    font-size: 48px;
+    color: #e9d4f0;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.3);
+    position: relative;
+  }
+  .envelope .wax::before{
+    content:""; position:absolute; inset:-6px;
+    border-radius: 50%;
+    border: 1px dashed rgba(74, 37, 102, 0.25);
+  }
+
+  .kicker{
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 15px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--violet);
+    margin-bottom: 14px;
+  }
+
+  .salutation{
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 54px;
+    line-height: 1.15;
+    color: var(--violet-deep);
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+  }
+  .salutation em{
+    font-family: 'Pinyon Script', cursive;
+    font-style: normal;
+    font-size: 82px;
+    color: var(--violet);
+    display: block;
+    line-height: 0.95;
+    margin-top: 6px;
+  }
+
+  .date-line{
+    display:flex; align-items:center; justify-content:center;
+    gap: 18px;
+    margin: 36px 0 8px;
+    font-size: 14px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .date-line::before, .date-line::after{
+    content:""; width: 60px; height:1px; background: var(--rule);
+  }
+
+  /* main sheet */
+  .sheet{
+    max-width: 760px;
+    margin: 0 auto;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.5), rgba(255,255,255,0.2));
+    padding: 80px 72px 72px;
+    position: relative;
+    z-index: 10;
+    border: 1px solid rgba(74, 37, 102, 0.12);
+    box-shadow:
+      0 30px 80px rgba(74, 37, 102, 0.12),
+      0 2px 0 rgba(255,255,255,0.6) inset;
+    background-color: #fbf6ee;
+  }
+
+  .sheet::before, .sheet::after{
+    content:""; position: absolute; left: 24px; right: 24px;
+    height: 1px; background: var(--rule);
+  }
+  .sheet::before{ top: 24px; }
+  .sheet::after{ bottom: 24px; }
+
+  .portrait{
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    margin: -160px auto 40px;
+    position: relative;
+    background: #e8d5ef center/cover no-repeat url('../shared/nosotros.png');
+    box-shadow:
+      0 0 0 8px #fbf6ee,
+      0 0 0 9px var(--violet-soft),
+      0 18px 40px rgba(74, 37, 102, 0.25);
+    overflow: hidden;
+  }
+
+  .opening-flourish{
+    text-align:center;
+    font-family: 'Pinyon Script', cursive;
+    font-size: 38px;
+    color: var(--violet);
+    margin-bottom: 8px;
+    line-height: 1;
+  }
+
+  .greeting{
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-style: italic;
+    font-weight: 500;
+    color: var(--violet-deep);
+    margin-bottom: 48px;
+    line-height: 1.4;
+  }
+
+  p.letter{
+    font-size: 19px;
+    line-height: 1.85;
+    margin-bottom: 24px;
+    text-align: justify;
+    hyphens: auto;
+    text-wrap: pretty;
+    color: var(--ink);
+  }
+  p.letter:first-of-type::first-letter{
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 78px;
+    float: left;
+    line-height: 0.85;
+    margin: 6px 10px 0 0;
+    color: var(--violet);
+  }
+  p.letter em{
+    font-style: italic;
+    color: var(--violet-deep);
+  }
+
+  .divider{
+    text-align:center;
+    margin: 48px 0;
+    color: var(--violet);
+    font-size: 18px;
+    letter-spacing: 0.6em;
+  }
+
+  .verse{
+    margin: 56px auto;
+    max-width: 560px;
+    text-align: center;
+    padding: 36px 24px;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+  }
+  .verse .quote{
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 26px;
+    line-height: 1.4;
+    color: var(--violet-deep);
+    margin-bottom: 14px;
+  }
+  .verse .cite{
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--violet);
+  }
+  .verse::before{
+    content: "❦";
+    position: absolute;
+    top: -14px; left: 50%; transform: translateX(-50%);
+    background: #fbf6ee;
+    padding: 0 14px;
+    color: var(--gold);
+    font-size: 20px;
+  }
+
+  .signature-block{
+    margin-top: 72px;
+    text-align: right;
+  }
+  .signature-block .closing{
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+  }
+  .signature-block .name{
+    font-family: 'Pinyon Script', cursive;
+    font-size: 112px;
+    line-height: 0.8;
+    color: var(--violet-deep);
+    display: inline-block;
+    transform: rotate(-4deg);
+    padding-right: 20px;
+  }
+  .signature-block .forever{
+    margin-top: 18px;
+    font-style: italic;
+    color: var(--violet);
+    font-size: 18px;
+    letter-spacing: 0.1em;
+  }
+
+  .footer-ornament{
+    text-align: center;
+    margin-top: 80px;
+    color: var(--gold);
+    font-size: 22px;
+    letter-spacing: 1em;
+    opacity: 0.7;
+  }
+
+  .nav{
+    position: fixed;
+    top: 24px; left: 24px;
+    z-index: 20;
+    font-family: 'EB Garamond', serif;
+    font-size: 13px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--violet-deep);
+  }
+  .nav a{
+    color: inherit;
+    text-decoration: none;
+    padding: 8px 14px;
+    border: 1px solid var(--rule);
+    background: rgba(251,246,238,0.7);
+    backdrop-filter: blur(4px);
+    transition: all .3s;
+  }
+  .nav a:hover{ background: var(--violet-deep); color: #fbf6ee; border-color: var(--violet-deep);}
+
+  @media (max-width: 720px){
+    .sheet{ padding: 56px 28px 48px; }
+    .salutation{ font-size: 40px; }
+    .salutation em{ font-size: 62px; }
+    .signature-block .name{ font-size: 82px; }
+    p.letter{ font-size: 18px; text-align: left; }
+    p.letter:first-of-type::first-letter{ font-size: 62px; }
+    .portrait{ width: 160px; height: 160px; margin-top: -130px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="nav"><a href="../index.html">← Volver</a></div>
+
+<header class="envelope">
+  <div class="wax">K</div>
+  <div class="kicker">Una carta para ti</div>
+  <h1 class="salutation">
+    Amada mía,
+    <em>Karina</em>
+  </h1>
+  <div class="date-line">Dueña de mi corazón</div>
+</header>
+
+<article class="sheet">
+
+  <div class="portrait" role="img" aria-label="Nosotros"></div>
+
+  <div class="opening-flourish">~ mi amor ~</div>
+  <p class="greeting">Amada mía, amor mío,<br>dueña de mi corazón.</p>
+
+  <p class="letter">Te has ganado mi respeto y admiración y tienes toda mi atención. Eres tú la razón por la que me esfuerzo cada día; por ti trabajo incansablemente, porque mi mayor deseo en esta vida es <em>hacerte feliz</em>.</p>
+
+  <p class="letter">A tu lado he aprendido el verdadero significado del amor. Me has enseñado, con tu propio ejemplo, que el amor es sacrificial. Veo tu entrega a diario; sé que, a pesar de tu dolor de espalda, sigues adelante sin rendirte. No te quejas, sino que, aun en medio de tu malestar, eres capaz de regalar tu sonrisa y servir a los demás. Eso, mi amor, es un nivel de amor superior.</p>
+
+  <p class="letter">Hemos atravesado tantas pruebas juntos, y en cada batalla has demostrado ser mi compañera guerrera. Me siento profundamente orgulloso de ti. Mi anhelo es verte brillar y destacar en todo lo que haces. Veo con gran admiración tu crecimiento en el escuadrón de oración y me encanta que seas un instrumento tan hermoso en las manos del Señor. Sé que a veces te preocupas por mi, pero confía en que Dios, en Su tiempo perfecto, me pondrá también dentro del equipo.</p>
+
+  <div class="divider">· · ·</div>
+
+  <p class="letter">Tu nivel de entrega te capacita para ser un instrumento de gracia cada vez mayor. Eres mi bendición más grande, así como lo eres para todas las personas a las que sirves y ministras con ese corazón tan entregado. Me sigues enseñando a amar al ver cómo te entregas sin pensar en el beneficio propio, sino en el de los demás.</p>
+
+  <p class="letter">Admiro profundamente cómo te despojas de ti misma para bendecir a otros, como a Dayana o a Naomi; eres capaz de hacerles un bien que quizás nunca recibas de vuelta. Eso es <em>amor incondicional puro</em>. Y reconozco, con inmensa gratitud, que de todo ese amor que Dios ha puesto en tu corazón, yo soy el mayor beneficiado.</p>
+
+  <div class="verse">
+    <div class="quote">«Toda tú eres hermosa, amada mía,<br>y en ti no hay mancha.»</div>
+    <div class="cite">Cantares 4:7</div>
+  </div>
+
+  <p class="letter">Quiero que sepas cuánto te valoro y te aprecio. Perdóname si no te lo digo con la frecuencia; por eso aprovecho este momento para dedicarte estas palabras que tanto te mereces. Sigamos luchando juntos, mi amor. Veo cada vez más cerca el tiempo de avivamiento y mi mayor esperanza es que sigas aquí para mí, así como yo estaré siempre para ti. <em>Mi compromiso inquebrantable es amarte hasta el final, y amarte con pasión.</em></p>
+
+  <p class="letter">Vuela, amada mía. Extiende tus alas sobre los montes y deja que el mundo vea la semilla que fue sembrada, que murió a sí misma para llevar mucho fruto. Deslumbra a todos con tu amor y tu paciencia. Sé ejemplo de los creyentes en palabra, conducta, amor, espíritu, fe y pureza.</p>
+
+  <div class="signature-block">
+    <div class="closing">Te amo por siempre,</div>
+    <div class="name">Esdras</div>
+    <div class="forever">— tuyo, hasta el final —</div>
+  </div>
+
+  <div class="footer-ornament">· ❦ ·</div>
+
+</article>
+
+<script src="../shared/petals.js"></script>
+<script>
+  createPetals({
+    count: 22,
+    colors: ['#b99ac9', '#d9bfe2', '#e8d5ef', '#6b3a8a', '#c9a8d4'],
+    zIndex: 3
+  });
+</script>
+
+</body>
+</html>

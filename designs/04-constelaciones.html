@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carta IV · Constelaciones</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-deep: #07041a;
+    --bg: #100a26;
+    --vellum: #f3e9d7;
+    --vellum-deep: #e6d8b8;
+    --ink: #efe4f5;
+    --ink-soft: #c3a9d4;
+    --mauve: #a97bc9;
+    --lilac: #d4a9e8;
+    --gold: #d4b572;
+    --gold-bright: #ecd093;
+    --gold-soft: #b89a5e;
+    --ink-deep: #2a1f3d;
+    --rule: rgba(212, 181, 114, 0.28);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{
+    background: var(--bg-deep);
+    color: var(--ink);
+    font-family: 'EB Garamond', serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  body{
+    background:
+      radial-gradient(ellipse at 18% 12%, rgba(169, 123, 201, 0.20), transparent 55%),
+      radial-gradient(ellipse at 82% 88%, rgba(212, 181, 114, 0.12), transparent 60%),
+      radial-gradient(ellipse at 50% 50%, rgba(74, 37, 102, 0.18), transparent 70%),
+      linear-gradient(165deg, #100a26 0%, #07041a 100%);
+    background-attachment: fixed;
+  }
+  /* dense star field */
+  body::before{
+    content:""; position: fixed; inset:0;
+    background-image:
+      radial-gradient(1px 1px at 8% 12%, rgba(255,255,255,0.7), transparent),
+      radial-gradient(1px 1px at 22% 38%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1.5px 1.5px at 36% 18%, rgba(212, 181, 114, 0.7), transparent),
+      radial-gradient(1px 1px at 48% 62%, rgba(255,255,255,0.55), transparent),
+      radial-gradient(1px 1px at 62% 28%, rgba(255,255,255,0.45), transparent),
+      radial-gradient(1.5px 1.5px at 78% 72%, rgba(212, 181, 114, 0.5), transparent),
+      radial-gradient(1px 1px at 90% 22%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1px 1px at 14% 78%, rgba(255,255,255,0.4), transparent),
+      radial-gradient(2px 2px at 56% 88%, rgba(212, 181, 114, 0.4), transparent),
+      radial-gradient(1px 1px at 72% 48%, rgba(255,255,255,0.5), transparent);
+    background-size: 720px 720px;
+    pointer-events: none;
+    z-index: 1;
+    animation: drift 80s linear infinite;
+  }
+  @keyframes drift{
+    0%{ background-position: 0 0; }
+    100%{ background-position: 720px 720px; }
+  }
+
+  .nav{
+    position: fixed; top: 22px; left: 22px; z-index: 50;
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 13px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold);
+  }
+  .nav a{
+    color: inherit; text-decoration: none;
+    padding: 8px 16px;
+    border: 1px solid var(--rule);
+    background: rgba(16, 10, 38, 0.7);
+    backdrop-filter: blur(6px);
+    transition: all .35s;
+  }
+  .nav a:hover{ background: var(--gold); color: var(--bg-deep); border-color: var(--gold); }
+
+  .carta-mark{
+    position: fixed; top: 22px; right: 22px; z-index: 50;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    background: rgba(16, 10, 38, 0.7);
+    padding: 8px 16px;
+    border: 1px solid var(--rule);
+    backdrop-filter: blur(6px);
+  }
+
+  main{
+    position: relative;
+    z-index: 10;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 110px 28px 120px;
+  }
+
+  /* ─── CELESTIAL HEADER ─────────────────────────── */
+  .vault{
+    text-align: center;
+    padding: 24px 0 80px;
+    position: relative;
+  }
+  .vault .stardate{
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    opacity: 0.85;
+  }
+  .vault .stardate::before, .vault .stardate::after{
+    content: "✦"; margin: 0 18px; color: var(--gold);
+  }
+
+  .star-svg{
+    display: block;
+    margin: 0 auto 36px;
+  }
+
+  h1.opus{
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(38px, 6vw, 64px);
+    line-height: 1.05;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+  }
+  h1.opus em{
+    font-family: 'Pinyon Script', cursive;
+    font-style: normal;
+    font-size: 1.5em;
+    color: var(--gold-bright);
+    display: block;
+    line-height: 0.85;
+    margin-top: 18px;
+    text-shadow: 0 0 24px rgba(212, 181, 114, 0.35);
+  }
+
+  .invocation{
+    max-width: 540px;
+    margin: 32px auto 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 21px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+
+  /* ─── SCROLL / PARCHMENT ─────────────────── */
+  .scroll{
+    position: relative;
+    background:
+      radial-gradient(ellipse at top left, rgba(255,255,255,0.5), transparent 55%),
+      radial-gradient(ellipse at bottom right, rgba(180, 150, 90, 0.25), transparent 55%),
+      linear-gradient(180deg, #f5ecd9 0%, #ead9b6 100%);
+    color: var(--ink-deep);
+    padding: 84px 88px 96px;
+    box-shadow:
+      0 40px 100px rgba(0,0,0,0.55),
+      0 0 0 1px rgba(212, 181, 114, 0.18),
+      inset 0 0 80px rgba(150, 110, 60, 0.12);
+    border-radius: 2px;
+  }
+  /* paper fiber overlay */
+  .scroll::before{
+    content:""; position:absolute; inset:0;
+    background-image:
+      radial-gradient(1px 1px at 18% 32%, rgba(80,60,30,0.10), transparent 2px),
+      radial-gradient(1px 1px at 64% 18%, rgba(80,60,30,0.08), transparent 2px),
+      radial-gradient(1px 1px at 38% 78%, rgba(80,60,30,0.10), transparent 2px),
+      radial-gradient(1.5px 1.5px at 82% 64%, rgba(80,60,30,0.07), transparent 2px);
+    background-size: 240px 240px, 200px 200px, 220px 220px, 260px 260px;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+    opacity: 0.65;
+  }
+  /* deckle edges */
+  .scroll::after{
+    content:""; position:absolute; left:0; right:0; top:-1px; height: 6px;
+    background-image:
+      radial-gradient(circle at 50% 100%, var(--bg-deep) 4px, transparent 5px);
+    background-size: 18px 6px;
+    background-repeat: repeat-x;
+  }
+
+  .gold-rule{
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-soft), transparent);
+    margin: 14px 0 36px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .salutation{
+    font-family: 'Pinyon Script', cursive;
+    font-size: 56px;
+    line-height: 0.9;
+    color: #6b3a8c;
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 2;
+  }
+  .salutation-sub{
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 16px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold-soft);
+    margin-bottom: 44px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Chapter rhythm */
+  .chapter{
+    margin-bottom: 56px;
+    position: relative;
+    z-index: 2;
+  }
+  .chapter-mark{
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    margin-bottom: 24px;
+  }
+  .chapter-num{
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-style: italic;
+    font-size: 64px;
+    line-height: 0.85;
+    color: var(--gold-soft);
+    letter-spacing: -0.02em;
+  }
+  .chapter-meta{
+    flex: 1;
+    border-bottom: 1px solid rgba(120, 90, 50, 0.35);
+    padding-bottom: 14px;
+  }
+  .chapter-eyebrow{
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold-soft);
+    margin-bottom: 6px;
+  }
+  .chapter-title{
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 1.15;
+    color: #4a2566;
+    letter-spacing: -0.005em;
+  }
+  .chapter-title em{
+    font-style: italic;
+    color: #8a4a2a;
+  }
+
+  p.prose{
+    font-family: 'EB Garamond', serif;
+    font-size: 18px;
+    line-height: 1.72;
+    color: #2a1f3d;
+    margin-bottom: 16px;
+    text-align: justify;
+    hyphens: auto;
+    text-wrap: pretty;
+  }
+  p.prose em{ color: #8a4a2a; font-style: italic; }
+  p.prose strong{ color: #6b3a8c; font-weight: 500; font-style: italic; }
+
+  .first-letter::first-letter{
+    font-family: 'Pinyon Script', cursive;
+    font-size: 88px;
+    float: left;
+    line-height: 0.7;
+    margin: 14px 14px 0 0;
+    color: #6b3a8c;
+  }
+
+  /* Pull quote — celestial */
+  .constellation{
+    margin: 56px -20px;
+    padding: 44px 40px;
+    background:
+      radial-gradient(ellipse at 50% 30%, rgba(74, 37, 102, 0.06), transparent 65%),
+      linear-gradient(180deg, rgba(212, 181, 114, 0.08), rgba(212, 181, 114, 0.02));
+    border-top: 1px solid rgba(120, 90, 50, 0.4);
+    border-bottom: 1px solid rgba(120, 90, 50, 0.4);
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+  .constellation .glyph{
+    color: var(--gold-soft);
+    letter-spacing: 1em;
+    font-size: 14px;
+    margin-bottom: 18px;
+  }
+  .constellation .q{
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 1.4;
+    color: #4a2566;
+    text-wrap: balance;
+  }
+  .constellation .q em{
+    font-style: italic;
+    color: #8a4a2a;
+  }
+  .constellation .c{
+    margin-top: 18px;
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold-soft);
+  }
+
+  /* Memory chips — small acknowledgments */
+  .stones{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin: 36px 0 8px;
+    position: relative;
+    z-index: 2;
+  }
+  .stone{
+    padding: 22px 20px;
+    background: rgba(255, 248, 230, 0.55);
+    border: 1px solid rgba(120, 90, 50, 0.28);
+    text-align: center;
+  }
+  .stone .label{
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold-soft);
+    margin-bottom: 8px;
+  }
+  .stone .word{
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 22px;
+    color: #4a2566;
+    line-height: 1.1;
+  }
+
+  /* Vow band */
+  .vow{
+    margin: 64px 0 36px;
+    padding: 32px 36px;
+    background: linear-gradient(180deg, #4a2566 0%, #2a1340 100%);
+    color: var(--vellum);
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 18px 40px rgba(0,0,0,0.25);
+  }
+  .vow::before, .vow::after{
+    content:""; position:absolute; left:14px; right:14px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .vow::before{ top: 10px; }
+  .vow::after{ bottom: 10px; }
+  .vow .label{
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 11px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+  .vow .text{
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: 24px;
+    line-height: 1.45;
+    color: var(--vellum);
+    text-wrap: balance;
+  }
+  .vow .text em{
+    font-style: italic;
+    color: var(--gold-bright);
+  }
+
+  /* Signature block */
+  .signoff{
+    margin-top: 56px;
+    text-align: right;
+    position: relative;
+    z-index: 2;
+  }
+  .signoff .closing{
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: #4a2566;
+    margin-bottom: 6px;
+  }
+  .signoff .signature{
+    font-family: 'Pinyon Script', cursive;
+    font-size: 130px;
+    line-height: 0.85;
+    color: #6b3a8c;
+    transform: rotate(-3deg);
+    display: inline-block;
+    margin-right: 12px;
+  }
+  .signoff .seal{
+    margin-top: 10px;
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold-soft);
+  }
+  .signoff .seal::before{
+    content: "✦"; margin-right: 14px;
+  }
+
+  /* coda below scroll */
+  .coda{
+    margin-top: 72px;
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+  .coda .line{
+    display: block;
+    color: var(--gold);
+    letter-spacing: 0.6em;
+    font-size: 14px;
+    margin-bottom: 18px;
+    opacity: 0.8;
+  }
+
+  @media (max-width: 760px){
+    main{ padding: 90px 16px 100px; }
+    .scroll{ padding: 56px 28px 64px; }
+    .salutation{ font-size: 44px; }
+    .chapter-num{ font-size: 48px; }
+    .chapter-title{ font-size: 22px; }
+    p.prose{ font-size: 16.5px; }
+    .stones{ grid-template-columns: 1fr; }
+    .signoff .signature{ font-size: 92px; }
+    .vow .text{ font-size: 20px; }
+    .constellation{ margin: 40px -8px; padding: 32px 22px; }
+    .constellation .q{ font-size: 21px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="nav"><a href="../index.html">← Volver</a></div>
+
+<main>
+
+  <!-- ───── CELESTIAL HEADER ───── -->
+  <section class="vault">
+    <div class="stardate">Una carta a mi amada</div>
+
+    <!-- starmap motif: two stars connected by a thin line -->
+    <svg class="star-svg" width="220" height="120" viewBox="0 0 220 120" aria-hidden="true">
+      <defs>
+        <radialGradient id="starGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#ecd093" stop-opacity="1"/>
+          <stop offset="60%" stop-color="#d4b572" stop-opacity="0.4"/>
+          <stop offset="100%" stop-color="#d4b572" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <!-- thin connecting line -->
+      <line x1="56" y1="44" x2="166" y2="78" stroke="#d4b572" stroke-width="0.6" stroke-dasharray="2 4" opacity="0.7"/>
+      <!-- left star (smaller) -->
+      <circle cx="56" cy="44" r="22" fill="url(#starGlow)"/>
+      <circle cx="56" cy="44" r="2.4" fill="#ecd093"/>
+      <!-- right star (larger) -->
+      <circle cx="166" cy="78" r="30" fill="url(#starGlow)"/>
+      <circle cx="166" cy="78" r="3" fill="#ecd093"/>
+      <!-- tiny accent stars -->
+      <circle cx="22" cy="92" r="1" fill="#efe4f5" opacity="0.7"/>
+      <circle cx="106" cy="22" r="1.2" fill="#efe4f5" opacity="0.6"/>
+      <circle cx="200" cy="36" r="1" fill="#efe4f5" opacity="0.7"/>
+      <circle cx="124" cy="100" r="1" fill="#d4a9e8" opacity="0.7"/>
+    </svg>
+
+    <h1 class="opus">
+      Cuando Dios te creó,
+      <em>pensó en mí.</em>
+    </h1>
+    <p class="invocation">Una carta tejida en gratitud — porque entre todas las constelaciones del cielo, tú eres la luz por la que yo encontré el camino a casa.</p>
+  </section>
+
+  <!-- ───── SCROLL ───── -->
+  <article class="scroll">
+
+    <div class="salutation">Mi amada,</div>
+    <div class="salutation-sub">— gracias, amor, por tanto —</div>
+    <div class="gold-rule"></div>
+
+    <!-- CHAPTER I — el principio -->
+    <section class="chapter">
+      <div class="chapter-mark">
+        <div class="chapter-num">I.</div>
+        <div class="chapter-meta">
+          <div class="chapter-eyebrow">El principio</div>
+          <div class="chapter-title">La luz que <em>trajiste</em> a mis días.</div>
+        </div>
+      </div>
+
+      <p class="prose first-letter">Recordaba estos días el momento en que nos conocimos y cómo trajiste luz a mis días. Eres la mujer perfecta para mí. Cariño mío, no sabes cuánto has hecho por mí ni cuánto bien has traído a mi vida.</p>
+
+      <p class="prose">Cuando nos conocimos, era una persona muy diferente, pero <strong>tú transformaste mi vida</strong>. Eres una persona que no condena, que acepta, y me siento cómodo siendo yo mismo gracias a ti. Gracias por todo lo que haces; <em>eres todo cuanto necesito</em>.</p>
+    </section>
+
+    <!-- CONSTELLATION QUOTE -->
+    <div class="constellation">
+      <div class="glyph">✦ · ✦ · ✦</div>
+      <div class="q">«Dios sabía la necesidad de mi corazón<br>y puso allí a la persona <em>adecuada</em>.»</div>
+      <div class="c">— Y te conocí</div>
+    </div>
+
+    <!-- CHAPTER II — la elección -->
+    <section class="chapter">
+      <div class="chapter-mark">
+        <div class="chapter-num">II.</div>
+        <div class="chapter-meta">
+          <div class="chapter-eyebrow">La elección</div>
+          <div class="chapter-title">Me enamoré de la mujer <em>que eres</em>.</div>
+        </div>
+      </div>
+
+      <p class="prose">Gracias por fijarte en mí y darme tu atención. En un momento en que me faltaba mucha atención, me sentí aceptado. Dios sabía la necesidad de mi corazón y puso allí a la persona adecuada.</p>
+
+      <p class="prose">Me enamoré de la mujer que eres — no de las apariencias, sino de <em>tu corazón</em>. Eres una persona sincera, y eso es algo que valoro mucho. A diferencia de quienes usan máscaras y tratan de aparentar cosas que no son, <strong>tú demostraste ser tal como eres</strong>, y yo amé la persona real que eres.</p>
+    </section>
+
+    <!-- STONES — three things she gave -->
+    <div class="stones">
+      <div class="stone">
+        <div class="label">Don I</div>
+        <div class="word">Aceptación</div>
+      </div>
+      <div class="stone">
+        <div class="label">Don II</div>
+        <div class="word">Sinceridad</div>
+      </div>
+      <div class="stone">
+        <div class="label">Don III</div>
+        <div class="word">Tu corazón</div>
+      </div>
+    </div>
+
+    <!-- CHAPTER III — la boda y el camino -->
+    <section class="chapter" style="margin-top: 64px;">
+      <div class="chapter-mark">
+        <div class="chapter-num">III.</div>
+        <div class="chapter-meta">
+          <div class="chapter-eyebrow">El camino que hicimos juntos</div>
+          <div class="chapter-title">Mi compañera, mi amante, <em>mi roca</em>.</div>
+        </div>
+      </div>
+
+      <p class="prose">Gracias por el día de nuestra boda; mi vida ha mejorado desde entonces. Gracias por ser mi compañera, mi amante y mi apoyo. Gracias por tu resistencia y tu perseverancia, porque siempre has estado a mi lado.</p>
+
+      <p class="prose">Cuando me tocó perder a mi madre, fuiste mi consuelo y mi soporte; y en todas las pruebas que nos ha tocado enfrentar, has estado allí, <em>mi roca</em>. Por todo esto, te amo, te valoro y te aprecio.</p>
+    </section>
+
+    <!-- VOW band -->
+    <div class="vow">
+      <div class="label">— mi pedido —</div>
+      <div class="text">Sigue conmigo, tomados de la mano, caminando juntos mientras <em>aprendemos y crecemos</em>.</div>
+    </div>
+
+    <!-- CHAPTER IV — coda agradecida -->
+    <section class="chapter">
+      <div class="chapter-mark">
+        <div class="chapter-num">IV.</div>
+        <div class="chapter-meta">
+          <div class="chapter-eyebrow">Hoy, más que nunca</div>
+          <div class="chapter-title">Aprender a vivir con un corazón <em>agradecido</em>.</div>
+        </div>
+      </div>
+
+      <p class="prose">Mi amor es bonito recordar todo lo que Dios nos ha dado, las maravillas de la vida y aprender a vivir con un corazón agradecido. Hoy más que nunca, doy gracias por tu vida — porque <strong>eres buena, y eres muy buena para mí</strong>.</p>
+
+      <p class="prose" style="text-align:center; font-style: italic; margin-top: 28px; font-size: 22px; color:#6b3a8c;">Te amo demasiado.</p>
+    </section>
+
+    <!-- SIGNATURE -->
+    <div class="signoff">
+      <div class="closing">Tuyo, hoy y siempre,</div>
+      <div class="signature">Esdras</div>
+      <div class="seal">Bajo las mismas estrellas — para ti</div>
+    </div>
+
+  </article>
+
+  <div class="coda">
+    <span class="line">✦ · ✦ · ✦</span>
+    Que esta carta sea otra estrella<br>en el cielo que vamos llenando juntos.
+  </div>
+
+</main>
+
+<script src="../shared/petals.js"></script>
+<script>
+  createPetals({
+    count: 14,
+    colors: ['#a97bc9', '#d4b572', '#d4a9e8', '#ecd093'],
+    zIndex: 2
+  });
+</script>
+
+</body>
+</html>

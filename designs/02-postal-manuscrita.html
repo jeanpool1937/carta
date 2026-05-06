@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carta II · Postal Manuscrita</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --kraft: #e8dcc4;
+    --kraft-deep: #c9b58f;
+    --ink: #2a2033;
+    --ink-blue: #1e2b5e;
+    --ink-violet: #4a2566;
+    --stamp: #a63447;
+    --tape: rgba(230, 210, 160, 0.55);
+    --paper-white: #f8f3e8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{
+    min-height:100vh;
+    font-family: 'Courier Prime', monospace;
+    color: var(--ink);
+    background: #2a1f35;
+    overflow-x: hidden;
+  }
+  body{
+    background:
+      radial-gradient(ellipse at 30% 20%, #3d2a4d 0%, #1f1428 70%),
+      #1f1428;
+    padding: 48px 20px 120px;
+  }
+  /* subtle wood / desk texture */
+  body::before{
+    content:""; position:fixed; inset:0;
+    background-image:
+      radial-gradient(circle at 10% 20%, rgba(255,255,255,0.02) 0 60px, transparent 60px),
+      radial-gradient(circle at 80% 70%, rgba(255,255,255,0.015) 0 80px, transparent 80px);
+    pointer-events: none;
+  }
+
+  .nav{
+    position: fixed; top: 20px; left: 20px; z-index: 50;
+    font-family: 'Courier Prime', monospace;
+    font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--paper-white);
+  }
+  .nav a{
+    color: inherit; text-decoration: none;
+    padding: 8px 14px;
+    border: 1px solid rgba(248,243,232,0.3);
+    background: rgba(26,20,33,0.6);
+    backdrop-filter: blur(6px);
+    transition: all .3s;
+  }
+  .nav a:hover{ background: var(--paper-white); color: var(--ink); }
+
+  .draft-badge{
+    position: fixed; top: 20px; right: 20px; z-index: 50;
+    font-family: 'Courier Prime', monospace;
+    font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: #ffcc66;
+    background: rgba(42, 28, 20, 0.85);
+    padding: 8px 14px;
+    border: 1px solid rgba(255, 204, 102, 0.4);
+    backdrop-filter: blur(6px);
+  }
+  .draft-badge::before{
+    content: "●";
+    color: #ffcc66;
+    margin-right: 8px;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse{ 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  .desk{
+    max-width: 820px;
+    margin: 140px auto 0;
+    position: relative;
+  }
+
+  /* Polaroid at top-left, tilted */
+  .polaroid{
+    position: absolute;
+    top: -60px; left: 50%;
+    width: 200px;
+    background: var(--paper-white);
+    padding: 14px 14px 48px;
+    box-shadow:
+      0 18px 40px rgba(0,0,0,0.5),
+      0 2px 6px rgba(0,0,0,0.3);
+    transform: translateX(-50%) rotate(-3deg);
+    z-index: 20;
+  }
+  .polaroid .pic{
+    width: 100%;
+    aspect-ratio: 1956 / 2120;
+    background: #c9b58f center/cover no-repeat url('../shared/nosotros.png');
+    filter: sepia(0.15) contrast(1.02);
+  }
+  .polaroid .caption{
+    position: absolute;
+    bottom: 14px; left: 0; right: 0;
+    text-align: center;
+    font-family: 'Caveat', cursive;
+    font-size: 22px;
+    color: var(--ink-blue);
+  }
+  .polaroid .tape{
+    position: absolute;
+    top: -14px; left: 50%;
+    transform: translateX(-50%) rotate(2deg);
+    width: 90px; height: 26px;
+    background: var(--tape);
+    border: 1px solid rgba(180, 160, 110, 0.4);
+    border-left: 1px dashed rgba(180, 160, 110, 0.3);
+    border-right: 1px dashed rgba(180, 160, 110, 0.3);
+  }
+
+  /* Main postcard / letter */
+  .postcard{
+    position: relative;
+    background: var(--kraft);
+    background-image:
+      radial-gradient(ellipse at top left, rgba(255,255,255,0.4), transparent 60%),
+      radial-gradient(ellipse at bottom right, rgba(150, 130, 90, 0.25), transparent 60%),
+      linear-gradient(180deg, #ede1c8 0%, #e2d4b4 100%);
+    padding: 80px 80px 100px;
+    box-shadow:
+      0 30px 80px rgba(0,0,0,0.5),
+      inset 0 0 0 1px rgba(100,80,50,0.12),
+      inset 0 0 80px rgba(150, 120, 70, 0.15);
+    border-radius: 2px;
+    min-height: 900px;
+  }
+
+  /* paper fiber texture */
+  .postcard::before{
+    content:""; position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(
+        90deg,
+        transparent 0 40px,
+        rgba(100,80,40,0.015) 40px 41px),
+      repeating-linear-gradient(
+        0deg,
+        transparent 0 40px,
+        rgba(100,80,40,0.015) 40px 41px),
+      radial-gradient(1px 1px at 30% 40%, rgba(80,60,30,0.08), transparent 2px),
+      radial-gradient(1px 1px at 70% 60%, rgba(80,60,30,0.08), transparent 2px),
+      radial-gradient(1.5px 1.5px at 15% 80%, rgba(80,60,30,0.06), transparent 2px);
+    background-size: 40px 40px, 40px 40px, 200px 200px, 180px 180px, 160px 160px;
+    opacity: 0.6;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+  }
+
+  /* Decorative tape corners */
+  .tape-corner{
+    position: absolute;
+    width: 110px; height: 32px;
+    background: var(--tape);
+    border-top: 1px dashed rgba(180, 160, 110, 0.4);
+    border-bottom: 1px dashed rgba(180, 160, 110, 0.4);
+    z-index: 15;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  }
+  .tape-tr{ top: -16px; right: 40px; transform: rotate(8deg); }
+  .tape-bl{ bottom: -16px; left: 60px; transform: rotate(-6deg); }
+
+  /* Header — postcard top */
+  .postcard-head{
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 30px;
+    align-items: start;
+    padding-bottom: 30px;
+    border-bottom: 1px dashed rgba(74, 37, 102, 0.3);
+    margin-bottom: 44px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .from-to .label{
+    font-family: 'Courier Prime', monospace;
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--ink-violet);
+    margin-bottom: 6px;
+    opacity: 0.7;
+  }
+  .from-to .value{
+    font-family: 'Caveat', cursive;
+    font-size: 32px;
+    color: var(--ink-blue);
+    line-height: 1;
+    margin-bottom: 18px;
+  }
+
+  /* Stamp */
+  .stamp{
+    position: relative;
+    width: 130px;
+    aspect-ratio: 3/4;
+    background:
+      linear-gradient(135deg, #d94b5c 0%, #a63447 60%, #7a2030 100%);
+    padding: 12px;
+    transform: rotate(4deg);
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.25));
+  }
+  .stamp::before{
+    content:""; position:absolute; inset:-1px;
+    background-image:
+      radial-gradient(circle at 50% 0%, var(--kraft) 3px, transparent 3.5px),
+      radial-gradient(circle at 50% 100%, var(--kraft) 3px, transparent 3.5px);
+    background-size: 12px 12px, 12px 12px;
+    background-position: 0 0, 0 100%;
+    background-repeat: repeat-x;
+    pointer-events: none;
+  }
+  .stamp::after{
+    content:""; position:absolute; inset:-1px;
+    background-image:
+      radial-gradient(circle at 0% 50%, var(--kraft) 3px, transparent 3.5px),
+      radial-gradient(circle at 100% 50%, var(--kraft) 3px, transparent 3.5px);
+    background-size: 12px 12px, 12px 12px;
+    background-position: 0 0, 100% 0;
+    background-repeat: repeat-y;
+    pointer-events: none;
+  }
+  .stamp-inner{
+    border: 1.5px solid rgba(255, 220, 180, 0.6);
+    padding: 10px 6px;
+    height: 100%;
+    color: #fde8d6;
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .stamp-inner .value{
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .stamp-inner .heart{
+    font-family: serif;
+    font-size: 36px;
+    line-height: 1;
+  }
+  .stamp-inner .place{
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-style: normal;
+  }
+
+  /* postmark circle */
+  .postmark{
+    position: absolute;
+    bottom: 70px; right: 60px;
+    width: 130px; height: 130px;
+    border-radius: 50%;
+    border: 2px solid var(--ink-blue);
+    color: var(--ink-blue);
+    display:flex; align-items: center; justify-content: center;
+    transform: rotate(-12deg);
+    opacity: 0.45;
+    pointer-events: none;
+    z-index: 3;
+    font-family: 'Courier Prime', monospace;
+  }
+  .postmark::before{
+    content:""; position:absolute; inset: 8px;
+    border: 1px solid var(--ink-blue);
+    border-radius: 50%;
+  }
+  .postmark .pm-text{
+    position: relative;
+    text-align: center;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+  .postmark .pm-text strong{
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 0.05em;
+    text-transform: none;
+    margin: 4px 0;
+  }
+
+  /* Content */
+  .letter-num{
+    font-family: 'Courier Prime', monospace;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--ink-violet);
+    margin-bottom: 14px;
+    position: relative;
+    z-index: 2;
+  }
+
+  h1.title{
+    font-family: 'Caveat', cursive;
+    font-weight: 600;
+    font-size: 84px;
+    line-height: 0.95;
+    color: var(--ink-blue);
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 2;
+  }
+  h1.title em{
+    font-style: normal;
+    color: var(--ink-violet);
+    background: linear-gradient(180deg, transparent 65%, rgba(166, 52, 71, 0.25) 65%, rgba(166, 52, 71, 0.25) 85%, transparent 85%);
+    padding: 0 6px;
+  }
+
+  .subtitle{
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 20px;
+    color: var(--ink-violet);
+    margin-bottom: 44px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Ruled paper effect for letter body */
+  .body{
+    position: relative;
+    z-index: 2;
+    padding: 4px 0;
+  }
+
+  p.note{
+    font-family: 'Caveat', cursive;
+    font-size: 26px;
+    line-height: 1.55;
+    color: var(--ink-blue);
+    margin-bottom: 22px;
+    text-wrap: pretty;
+  }
+  p.note:first-child::first-letter{
+    font-family: 'Pinyon Script', cursive;
+    font-size: 78px;
+    float: left;
+    line-height: 0.8;
+    margin: 10px 10px 0 0;
+    color: var(--ink-violet);
+  }
+  p.note em{
+    font-style: normal;
+    color: var(--ink-violet);
+    background: linear-gradient(180deg, transparent 70%, rgba(255, 204, 102, 0.45) 70%, rgba(255, 204, 102, 0.45) 90%, transparent 90%);
+    padding: 0 4px;
+  }
+  p.note strong{
+    font-weight: 700;
+    color: var(--stamp);
+  }
+
+  /* Placeholder note about draft */
+  .draft-note{
+    margin: 40px 0;
+    padding: 24px 28px;
+    background: rgba(255, 248, 220, 0.55);
+    border: 1px dashed rgba(166, 52, 71, 0.4);
+    font-family: 'Courier Prime', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--ink-violet);
+    position: relative;
+    z-index: 2;
+  }
+  .draft-note strong{
+    font-family: 'Courier Prime', monospace;
+    font-weight: 700;
+    color: var(--stamp);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-size: 11px;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .verse-cut{
+    margin: 40px -20px;
+    padding: 28px 24px;
+    border-top: 2px dashed rgba(74, 37, 102, 0.35);
+    border-bottom: 2px dashed rgba(74, 37, 102, 0.35);
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--ink-violet);
+    position: relative;
+    z-index: 2;
+  }
+  .verse-cut .q{
+    font-size: 24px;
+    line-height: 1.4;
+    margin-bottom: 12px;
+  }
+  .verse-cut .c{
+    font-family: 'Courier Prime', monospace;
+    font-style: normal;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+  .verse-cut::before{
+    content: "✂";
+    position: absolute;
+    top: -14px;
+    left: 40px;
+    background: var(--kraft);
+    padding: 0 8px;
+    color: var(--ink-violet);
+    font-size: 16px;
+    transform: rotate(-90deg);
+  }
+
+  /* Signature */
+  .signoff{
+    margin-top: 48px;
+    position: relative;
+    z-index: 2;
+  }
+  .signoff .line{
+    font-family: 'Caveat', cursive;
+    font-size: 28px;
+    color: var(--ink-blue);
+    margin-bottom: 8px;
+  }
+  .signoff .signature{
+    font-family: 'Pinyon Script', cursive;
+    font-size: 120px;
+    line-height: 0.8;
+    color: var(--ink-violet);
+    transform: rotate(-5deg);
+    display: inline-block;
+    margin-top: 8px;
+  }
+  .signoff .ps{
+    margin-top: 28px;
+    padding-top: 16px;
+    border-top: 1px dashed rgba(74, 37, 102, 0.25);
+    font-family: 'Caveat', cursive;
+    font-size: 22px;
+    color: var(--ink-blue);
+  }
+  .signoff .ps strong{
+    font-family: 'Courier Prime', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    color: var(--stamp);
+    margin-right: 10px;
+  }
+
+  /* Date stamp top-right beside stamp */
+  .date-stamp{
+    font-family: 'Courier Prime', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--ink-violet);
+    margin-top: 14px;
+    padding: 4px 10px;
+    border: 1px dashed rgba(74, 37, 102, 0.4);
+    display: inline-block;
+    transform: rotate(-2deg);
+  }
+
+  @media (max-width: 720px){
+    .polaroid{ position: relative; top: 0; left: 0; margin: 0 auto 24px; transform: rotate(-3deg); }
+    .postcard{ padding: 60px 32px 80px; }
+    h1.title{ font-size: 56px; }
+    .postcard-head{ grid-template-columns: 1fr; }
+    .stamp{ justify-self: start; }
+    p.note{ font-size: 22px; }
+    .postmark{ width: 100px; height: 100px; bottom: 30px; right: 20px; }
+    .signoff .signature{ font-size: 90px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="nav"><a href="../index.html">← Volver</a></div>
+
+<div class="desk">
+
+  <!-- Polaroid -->
+  <div class="polaroid">
+    <div class="tape"></div>
+    <div class="pic"></div>
+    <div class="caption">nosotros ♡</div>
+  </div>
+
+  <!-- Postcard main -->
+  <article class="postcard">
+    <div class="tape-corner tape-tr"></div>
+    <div class="tape-corner tape-bl"></div>
+
+    <header class="postcard-head">
+      <div class="from-to">
+        <div class="label">Para</div>
+        <div class="value">Karina, mi amor</div>
+        <div class="label">De</div>
+        <div class="value">Esdras</div>
+        <div class="date-stamp">22 · ABR · 2026</div>
+      </div>
+      <div>
+        <div class="stamp">
+          <div class="stamp-inner">
+            <div class="value">II</div>
+            <div class="heart">♥</div>
+            <div class="place">Correo · Amor</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="letter-num">Carta N.º 02</div>
+    <h1 class="title">Una nota <em>breve</em><br>para ti</h1>
+    <p class="subtitle">— mientras pienso en ti en medio del día —</p>
+
+    <div class="body">
+
+      <p class="note">Karina, hay días en los que no necesito una carta larga para decirte lo que siento. Basta con una <em>línea</em>, una pausa en medio del día, para recordarte que <strong>estás primero</strong> en todo lo que hago.</p>
+
+      <p class="note">Esta es una postal corta, escrita con prisa y con todo el cariño. Un pequeño recordatorio de que te pienso, de que te admiro, y de que sigo aprendiendo de ti cada día.</p>
+
+      <p class="note">Estos días de retiro he visto la mujer que <strong>Dios tanto ama</strong> por tu corazón quebrantado y humilde. He visto cómo Dios usa tu vida — y gracias, porque <em>me llena de orgullo verte servir</em>.</p>
+
+      <p class="note">Que seamos una <strong>familia sacerdotal</strong>, encantados de servir.</p>
+
+      <p class="note">Mientras termino de escribir esto, pienso en lo mucho que me das sin darte cuenta. Una sonrisa tuya me cambia el día entero. Y cuando oras, cuando sirves, cuando ríes — yo <em>te miro</em> y doy gracias.</p>
+
+      <div class="verse-cut">
+        <div class="q">«Muchas mujeres hicieron el bien,<br>mas tú sobrepasas a todas.»</div>
+        <div class="c">Proverbios 31:29</div>
+      </div>
+
+      <p class="note">Te amo, mi vida. Sigue brillando así, como solo tú sabes hacerlo. Yo aquí, orando por ti, cuidándote en lo que pueda y amándote <em>a propósito</em>, todos los días.</p>
+
+    </div>
+
+    <div class="signoff">
+      <div class="line">Con todo mi cariño,</div>
+      <div class="signature">Esdras</div>
+      <div class="ps"><strong>P.D.</strong> No olvides que eres inmensamente amada. — E.</div>
+    </div>
+
+    <!-- postmark decoration -->
+    <div class="postmark" aria-hidden="true">
+      <div class="pm-text">
+        · abril ·
+        <strong>2026</strong>
+        · para ti ·
+      </div>
+    </div>
+
+  </article>
+
+</div>
+
+<script src="../shared/petals.js"></script>
+<script>
+  createPetals({
+    count: 12,
+    colors: ['#d4b8e2', '#c9b58f', '#a63447', '#e8dcc4'],
+    zIndex: 1
+  });
+</script>
+
+</body>
+</html>

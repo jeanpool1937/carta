@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carta para Karina · Libro Abierto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=EB+Garamond:ital,wght@0,400;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #1a0f2a;
+    --bg-deep: #0f0720;
+    --page: #2a1a42;
+    --page-soft: #361f52;
+    --ink: #efe4f5;
+    --ink-soft: #c3a9d4;
+    --violet: #a97bc9;
+    --violet-bright: #d4a9e8;
+    --gold: #d4b572;
+    --gold-soft: #b89a5e;
+    --rule: rgba(212, 181, 114, 0.3);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{
+    background: var(--bg-deep);
+    color: var(--ink);
+    font-family: 'EB Garamond', serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  body{
+    background:
+      radial-gradient(ellipse at 20% 10%, rgba(169, 123, 201, 0.18) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 90%, rgba(212, 181, 114, 0.1) 0%, transparent 55%),
+      linear-gradient(160deg, #1a0f2a 0%, #0f0720 100%);
+    background-attachment: fixed;
+  }
+
+  /* subtle stars */
+  body::before{
+    content:""; position: fixed; inset:0;
+    background-image:
+      radial-gradient(1px 1px at 13% 22%, rgba(255,255,255,0.6), transparent),
+      radial-gradient(1px 1px at 47% 68%, rgba(255,255,255,0.4), transparent),
+      radial-gradient(1px 1px at 82% 18%, rgba(212, 181, 114, 0.5), transparent),
+      radial-gradient(1px 1px at 29% 85%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1px 1px at 71% 45%, rgba(212, 181, 114, 0.4), transparent),
+      radial-gradient(1.5px 1.5px at 90% 72%, rgba(255,255,255,0.35), transparent);
+    background-size: 600px 600px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .nav{
+    position: fixed; top: 20px; left: 20px; z-index: 40;
+    font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold);
+  }
+  .nav a{
+    color: inherit; text-decoration: none;
+    padding: 8px 14px;
+    border: 1px solid var(--rule);
+    background: rgba(26, 15, 42, 0.7);
+    backdrop-filter: blur(6px);
+    transition: all .3s;
+  }
+  .nav a:hover{ background: var(--gold); color: var(--bg-deep); }
+
+  .book-counter{
+    position: fixed; top: 20px; right: 20px; z-index: 40;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    background: rgba(26, 15, 42, 0.7);
+    padding: 8px 16px;
+    border: 1px solid var(--rule);
+    backdrop-filter: blur(6px);
+  }
+
+  .stage{
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 70px 24px 120px;
+    position: relative;
+    z-index: 10;
+  }
+
+  .book{
+    width: min(1400px, 96vw);
+    background:
+      linear-gradient(90deg,
+        var(--page-soft) 0%,
+        var(--page) 48%,
+        #0a0415 50%,
+        var(--page) 52%,
+        var(--page-soft) 100%);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    box-shadow:
+      0 60px 120px rgba(0,0,0,0.6),
+      0 0 0 1px rgba(212, 181, 114, 0.15),
+      inset 0 0 80px rgba(0,0,0,0.4);
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  /* book binding shadow */
+  .book::before{
+    content:""; position:absolute;
+    top: 0; bottom: 0; left: 50%;
+    width: 40px; transform: translateX(-50%);
+    background:
+      linear-gradient(90deg,
+        transparent 0%,
+        rgba(0,0,0,0.5) 30%,
+        rgba(0,0,0,0.7) 50%,
+        rgba(0,0,0,0.5) 70%,
+        transparent 100%);
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  .page-side{
+    padding: 56px 56px 64px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .page-left{ border-right: 1px solid rgba(212, 181, 114, 0.12); }
+
+  .page-num{
+    margin-top: auto;
+    padding-top: 32px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--gold);
+    letter-spacing: 0.3em;
+    opacity: 0.9;
+  }
+  .page-left .page-num{ text-align: center; }
+  .page-right .page-num{ text-align: center; }
+
+  .chapter-label{
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    display:flex; align-items:center; gap: 12px;
+  }
+  .chapter-label::after{
+    content:""; flex:1; height:1px; background: var(--rule);
+  }
+
+  h1.book-title{
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 60px;
+    line-height: 1;
+    color: var(--violet-bright);
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+  }
+  h1.book-title em{
+    font-family: 'Pinyon Script', cursive;
+    font-style: normal;
+    font-size: 88px;
+    color: var(--gold);
+    display:block;
+    line-height: 0.8;
+    margin-top: 8px;
+  }
+
+  .subtitle{
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink-soft);
+    margin-top: 20px;
+    line-height: 1.4;
+  }
+
+  .flourish{
+    text-align: center;
+    font-size: 22px;
+    letter-spacing: 0.8em;
+    color: var(--gold);
+    margin: 28px 0;
+    opacity: 0.7;
+  }
+
+  h2.chapter-title{
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 38px;
+    line-height: 1.1;
+    color: var(--violet-bright);
+    margin-bottom: 32px;
+    letter-spacing: -0.01em;
+    clear: both;
+  }
+  h2.chapter-title em{
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  p.prose{
+    font-size: 16.5px;
+    line-height: 1.7;
+    margin-bottom: 14px;
+    color: var(--ink);
+    text-align: justify;
+    hyphens: auto;
+    text-wrap: pretty;
+  }
+  p.prose em{ color: var(--gold); font-style: italic; }
+  p.prose strong{ color: var(--violet-bright); font-weight: 500; }
+
+  .drop-cap::first-letter{
+    font-family: 'Pinyon Script', cursive;
+    font-size: 80px;
+    float: left;
+    line-height: 0.75;
+    margin: 8px 12px 0 0;
+    color: var(--gold);
+  }
+
+  .portrait{
+    width: 100%;
+    aspect-ratio: 1956 / 2120;
+    background: #361f52 center/cover no-repeat url('../shared/nosotros.png');
+    border: 1px solid var(--rule);
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .portrait::before{
+    content:""; position: absolute; inset: 10px;
+    border: 1px solid rgba(212, 181, 114, 0.35);
+    pointer-events: none;
+  }
+
+  .verse-card{
+    margin: 40px 0;
+    padding: 32px 28px;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    text-align: center;
+  }
+  .verse-card .q{
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 26px;
+    line-height: 1.35;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+  .verse-card .c{
+    font-size: 12px; letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  .signature-closer{
+    text-align: center;
+    padding: 40px 0 20px;
+  }
+  .signature-closer .closing-line{
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 24px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+  }
+  .signature-closer .big-name{
+    font-family: 'Pinyon Script', cursive;
+    font-size: 140px;
+    line-height: 0.8;
+    color: var(--gold);
+    transform: rotate(-3deg);
+    display: inline-block;
+  }
+  .signature-closer .forever{
+    margin-top: 24px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 17px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--violet);
+  }
+
+  /* Controls */
+  .controls{
+    position: fixed;
+    bottom: 28px; left: 50%; transform: translateX(-50%);
+    z-index: 30;
+    display:flex; gap: 10px; align-items: center;
+    background: rgba(15, 7, 32, 0.85);
+    border: 1px solid var(--rule);
+    padding: 10px 14px;
+    border-radius: 40px;
+    backdrop-filter: blur(10px);
+  }
+  .controls button{
+    background: transparent;
+    border: 1px solid var(--rule);
+    color: var(--gold);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    padding: 8px 20px;
+    cursor: pointer;
+    border-radius: 40px;
+    transition: all .3s;
+  }
+  .controls button:hover:not(:disabled){ background: var(--gold); color: var(--bg-deep); }
+  .controls button:disabled{ opacity: .25; cursor: not-allowed; }
+  .controls .dots{ display:flex; gap: 8px; padding: 0 8px; }
+  .controls .dot{
+    width: 7px; height: 7px; border-radius: 50%;
+    background: rgba(212, 181, 114, 0.3);
+    transition: all .3s;
+  }
+  .controls .dot.active{ background: var(--gold); transform: scale(1.4); }
+
+  .spread{ display: none; }
+  .spread.active{ display: contents; }
+
+  /* fade transition */
+  .book.turning .page-side{ opacity: 0; transition: opacity .3s; }
+
+  .portrait{ margin-bottom: 16px; max-height: 240px; }
+  .verse-card{ margin: 24px 0; padding: 22px 18px; }
+  .verse-card .q{ font-size: 22px; }
+  .flourish{ margin: 18px 0; }
+  .signature-closer{ padding: 20px 0 10px; }
+  .signature-closer .big-name{ font-size: 110px; }
+  .signature-closer .closing-line{ font-size: 20px; margin-bottom: 10px; }
+
+  @media (max-width: 900px){
+    .book{
+      aspect-ratio: auto;
+      max-height: none;
+      grid-template-columns: 1fr;
+    }
+    .book::before{ display: none; }
+    .page-left{ border-right: none; border-bottom: 1px solid var(--rule); }
+    .page-side{ padding: 40px 28px; }
+    h1.book-title{ font-size: 48px; }
+    h1.book-title em{ font-size: 72px; }
+    h2.chapter-title{ font-size: 32px; }
+    .signature-closer .big-name{ font-size: 96px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="nav"><a href="../index.html">← Volver</a></div>
+<div class="book-counter" id="counter">Capítulo I · II</div>
+
+<div class="stage">
+  <div class="book" id="book">
+
+    <!-- SPREAD 1: Portada + inicio -->
+    <div class="spread active" data-spread="0">
+      <div class="page-side page-left">
+        <div class="chapter-label">Prólogo</div>
+        <h1 class="book-title">
+          Amada mía,
+          <em>Karina</em>
+        </h1>
+        <p class="subtitle">Una carta a la dueña de mi corazón — escrita por quien, de todo el amor que Dios ha puesto en ti, es el mayor beneficiado.</p>
+        <div class="flourish">❦ · ❦ · ❦</div>
+        <div class="portrait" role="img" aria-label="Nosotros"></div>
+        <div class="page-num">— i —</div>
+      </div>
+      <div class="page-side page-right">
+        <div class="chapter-label">Capítulo I · El don de tu entrega</div>
+        <h2 class="chapter-title">Te has ganado <em>mi respeto</em> y admiración.</h2>
+        <p class="prose drop-cap">Tienes toda mi atención. Eres tú la razón por la que me esfuerzo cada día; por ti trabajo incansablemente, porque mi mayor deseo en esta vida es <em>hacerte feliz</em>.</p>
+        <p class="prose">A tu lado he aprendido el verdadero significado del amor. Me has enseñado, con tu propio ejemplo, que <strong>el amor es sacrificial</strong>. Veo tu entrega a diario; sé que, a pesar de tu dolor de espalda, sigues adelante sin rendirte.</p>
+        <p class="prose">No te quejas, sino que, aun en medio de tu malestar, eres capaz de regalar tu sonrisa y servir a los demás. Eso, mi amor, es un <em>nivel de amor superior</em>.</p>
+        <div class="page-num">— 1 —</div>
+      </div>
+    </div>
+
+    <!-- SPREAD 2: Guerrera + bendición -->
+    <div class="spread" data-spread="1">
+      <div class="page-side page-left">
+        <div class="chapter-label">Capítulo II · Mi compañera guerrera</div>
+        <h2 class="chapter-title">Hemos atravesado <em>tantas pruebas</em> juntos.</h2>
+        <p class="prose drop-cap">En cada batalla has demostrado ser mi compañera guerrera. Me siento profundamente orgulloso de ti. Mi anhelo es verte brillar y destacar en todo lo que haces.</p>
+        <p class="prose">Veo con gran admiración tu crecimiento en el <strong>escuadrón de oración</strong> y me encanta que seas un instrumento tan hermoso en las manos del Señor.</p>
+        <p class="prose">Sé que a veces te preocupas por mi, pero confía en que Dios, en Su tiempo perfecto, me pondrá también dentro del equipo.</p>
+        <div class="page-num">— 2 —</div>
+      </div>
+      <div class="page-side page-right">
+        <div class="chapter-label">Capítulo III · Instrumento de gracia</div>
+        <h2 class="chapter-title">Eres mi <em>bendición</em> más grande.</h2>
+        <p class="prose drop-cap">Tu nivel de entrega te capacita para ser un instrumento de gracia cada vez mayor. Lo eres para todas las personas a las que sirves y ministras con ese corazón tan entregado.</p>
+        <p class="prose">Me sigues enseñando a amar al ver cómo te entregas sin pensar en el beneficio propio, sino en el de los demás. Admiro profundamente cómo te despojas de ti misma para bendecir a otros, como a <em>Dayana</em> o a <em>Naomi</em>; eres capaz de hacerles un bien que quizás nunca recibas de vuelta.</p>
+        <p class="prose">Eso es <strong>amor incondicional puro</strong>. Y reconozco, con inmensa gratitud, que de todo ese amor que Dios ha puesto en tu corazón, <em>yo soy el mayor beneficiado</em>.</p>
+        <div class="page-num">— 3 —</div>
+      </div>
+    </div>
+
+    <!-- SPREAD 3: Versículo + promesa + firma -->
+    <div class="spread" data-spread="2">
+      <div class="page-side page-left">
+        <div class="chapter-label">Interludio · Cantares</div>
+        <div class="verse-card" style="margin-top: 80px;">
+          <div class="q">«Toda tú eres hermosa,<br>amada mía,<br>y en ti no hay mancha.»</div>
+          <div class="c">Cantares 4:7</div>
+        </div>
+        <h2 class="chapter-title" style="margin-top: 48px; text-align:center;">Vuela, <em>amada mía</em>.</h2>
+        <p class="prose" style="text-align:center; font-style: italic;">Extiende tus alas sobre los montes y deja que el mundo vea la semilla que fue sembrada, que murió a sí misma para llevar mucho fruto.</p>
+        <div class="page-num">— 4 —</div>
+      </div>
+      <div class="page-side page-right">
+        <div class="chapter-label">Epílogo · Mi compromiso</div>
+        <h2 class="chapter-title">Sigamos luchando <em>juntos</em>.</h2>
+        <p class="prose drop-cap">Quiero que sepas cuánto te valoro y te aprecio. Perdóname si no te lo digo con la frecuencia; por eso aprovecho este momento para dedicarte estas palabras que tanto te mereces.</p>
+        <p class="prose">Veo cada vez más cerca el tiempo de avivamiento y mi mayor esperanza es que sigas aquí para mí, así como yo estaré siempre para ti. <em>Mi compromiso inquebrantable es amarte hasta el final, y amarte con pasión.</em></p>
+        <p class="prose">Deslumbra a todos con tu amor y tu paciencia. Sé ejemplo de los creyentes en <strong>palabra, conducta, amor, espíritu, fe y pureza</strong>.</p>
+
+        <div class="signature-closer">
+          <div class="closing-line">Te amo por siempre, tuyo,</div>
+          <div class="big-name">Esdras</div>
+        </div>
+        <div class="page-num">— fin —</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="controls">
+  <button id="prev" aria-label="Anterior">◀ Anterior</button>
+  <div class="dots" id="dots"></div>
+  <button id="next" aria-label="Siguiente">Siguiente ▶</button>
+</div>
+
+<script src="../shared/petals.js"></script>
+<script>
+  createPetals({
+    count: 16,
+    colors: ['#a97bc9', '#d4b572', '#d4a9e8', '#7c5299'],
+    zIndex: 3
+  });
+
+  const spreads = document.querySelectorAll('.spread');
+  const total = spreads.length;
+  const dotsEl = document.getElementById('dots');
+  const counter = document.getElementById('counter');
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+  const book = document.getElementById('book');
+
+  const ROMAN = ['I','II','III','IV','V'];
+  let current = parseInt(localStorage.getItem('carta-book-spread') || '0', 10);
+  if (current >= total) current = 0;
+
+  for (let i = 0; i < total; i++){
+    const d = document.createElement('span');
+    d.className = 'dot';
+    d.addEventListener('click', () => go(i));
+    dotsEl.appendChild(d);
+  }
+
+  function render(){
+    spreads.forEach((s, i) => s.classList.toggle('active', i === current));
+    dotsEl.querySelectorAll('.dot').forEach((d,i) => d.classList.toggle('active', i === current));
+    counter.textContent = `Parte ${ROMAN[current]} · ${ROMAN[total-1]}`;
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current === total - 1;
+    localStorage.setItem('carta-book-spread', String(current));
+    book.scrollTop = 0;
+    book.querySelectorAll('.page-side').forEach(p => p.scrollTop = 0);
+  }
+
+  function go(i){
+    if (i < 0 || i >= total) return;
+    book.classList.add('turning');
+    setTimeout(() => {
+      current = i;
+      render();
+      book.classList.remove('turning');
+    }, 200);
+  }
+
+  prevBtn.addEventListener('click', () => go(current - 1));
+  nextBtn.addEventListener('click', () => go(current + 1));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') go(current + 1);
+    if (e.key === 'ArrowLeft') go(current - 1);
+  });
+
+  render();
+</script>
+
+</body>
+</html>
