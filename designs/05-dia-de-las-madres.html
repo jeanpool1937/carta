@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carta V · Feliz Día de la Madre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --rose:       #c2516a;
+    --rose-deep:  #8b2a40;
+    --rose-soft:  #e8a0b0;
+    --rose-pale:  #f7dde4;
+    --sage:       #7a9e7e;
+    --sage-soft:  #b8d4bc;
+    --gold:       #b89a5e;
+    --paper:      #fdf6f0;
+    --paper-warm: #f5ebe0;
+    --ink:        #2e1a20;
+    --ink-soft:   #5a3340;
+    --rule:       rgba(194, 81, 106, 0.18);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'EB Garamond', serif;
+    font-size: 19px;
+    line-height: 1.8;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  body{
+    background:
+      radial-gradient(ellipse at 0% 0%, rgba(232,160,176,0.25), transparent 50%),
+      radial-gradient(ellipse at 100% 100%, rgba(184,212,188,0.2), transparent 50%),
+      radial-gradient(ellipse at 50% 30%, rgba(247,221,228,0.3), transparent 60%),
+      linear-gradient(160deg, #fdf6f0 0%, #f0e4d8 100%);
+    background-attachment: fixed;
+    padding: 60px 24px 120px;
+  }
+
+  /* subtle paper texture */
+  body::before{
+    content:"";
+    position: fixed; inset: 0;
+    pointer-events: none;
+    background-image:
+      radial-gradient(circle at 25% 40%, rgba(194,81,106,0.04) 0 1.5px, transparent 1.5px),
+      radial-gradient(circle at 75% 60%, rgba(122,158,126,0.04) 0 1px, transparent 1px);
+    background-size: 120px 120px, 80px 80px;
+    z-index: 2;
+    mix-blend-mode: multiply;
+  }
+
+  /* ── NAV ── */
+  .nav{
+    position: fixed;
+    top: 24px; left: 24px;
+    z-index: 30;
+    font-family: 'EB Garamond', serif;
+    font-size: 13px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+  .nav a{
+    color: var(--rose-deep);
+    text-decoration: none;
+    padding: 8px 14px;
+    border: 1px solid var(--rule);
+    background: rgba(253,246,240,0.8);
+    backdrop-filter: blur(4px);
+    transition: all .3s;
+    display: inline-block;
+  }
+  .nav a:hover{ background: var(--rose-deep); color: var(--paper); border-color: var(--rose-deep); }
+
+  /* ── HEADER ── */
+  .envelope{
+    max-width: 760px;
+    margin: 0 auto 56px;
+    position: relative;
+    z-index: 10;
+    text-align: center;
+  }
+
+  .wax{
+    width: 100px; height: 100px;
+    margin: 0 auto 28px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #e8758a 0%, #b03050 55%, #6e1a2e 100%);
+    box-shadow:
+      inset -6px -10px 18px rgba(0,0,0,0.3),
+      inset 6px 8px 14px rgba(255,255,255,0.15),
+      0 10px 32px rgba(139,42,64,0.35);
+    display:flex; align-items:center; justify-content:center;
+    font-size: 42px;
+    position: relative;
+  }
+  .wax::before{
+    content:""; position:absolute; inset:-6px;
+    border-radius: 50%;
+    border: 1px dashed rgba(194,81,106,0.3);
+  }
+
+  .kicker{
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 15px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin-bottom: 16px;
+  }
+
+  .salutation{
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 52px;
+    line-height: 1.15;
+    color: var(--rose-deep);
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+  }
+  .salutation em{
+    font-family: 'Pinyon Script', cursive;
+    font-style: normal;
+    font-size: 80px;
+    color: var(--rose);
+    display: block;
+    line-height: 1;
+    margin-top: 4px;
+  }
+
+  .date-line{
+    display:flex; align-items:center; justify-content:center;
+    gap: 18px;
+    margin: 36px 0 8px;
+    font-size: 14px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .date-line::before, .date-line::after{
+    content:""; width: 60px; height:1px; background: var(--rule);
+  }
+
+  /* ── CARD SHEET ── */
+  .sheet{
+    max-width: 760px;
+    margin: 0 auto;
+    background-color: #fdfaf6;
+    background-image:
+      linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.2));
+    padding: 80px 72px 72px;
+    position: relative;
+    z-index: 10;
+    border: 1px solid rgba(194,81,106,0.12);
+    box-shadow:
+      0 30px 80px rgba(139,42,64,0.1),
+      0 2px 0 rgba(255,255,255,0.7) inset;
+  }
+  .sheet::before, .sheet::after{
+    content:""; position:absolute; left: 24px; right: 24px;
+    height: 1px; background: var(--rule);
+  }
+  .sheet::before{ top: 24px; }
+  .sheet::after{ bottom: 24px; }
+
+  /* decorative corner flowers */
+  .sheet .corner{
+    position: absolute;
+    font-size: 28px;
+    line-height: 1;
+    opacity: 0.35;
+  }
+  .sheet .corner.tl{ top: 14px; left: 14px; transform: rotate(-20deg); }
+  .sheet .corner.tr{ top: 14px; right: 14px; transform: rotate(20deg); }
+  .sheet .corner.bl{ bottom: 14px; left: 14px; transform: rotate(20deg); }
+  .sheet .corner.br{ bottom: 14px; right: 14px; transform: rotate(-20deg); }
+
+  /* portrait photo */
+  .portrait{
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    margin: -150px auto 44px;
+    position: relative;
+    background: #f0d4da center/cover no-repeat url('../shared/nosotros.png');
+    box-shadow:
+      0 0 0 8px #fdfaf6,
+      0 0 0 10px var(--rose-soft),
+      0 18px 40px rgba(139,42,64,0.2);
+    overflow: hidden;
+  }
+
+  /* opening */
+  .opening-flourish{
+    text-align:center;
+    font-family: 'Pinyon Script', cursive;
+    font-size: 40px;
+    color: var(--rose);
+    margin-bottom: 6px;
+    line-height: 1;
+  }
+  .greeting{
+    text-align:center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    font-style: italic;
+    font-weight: 500;
+    color: var(--rose-deep);
+    margin-bottom: 52px;
+    line-height: 1.4;
+  }
+
+  /* letter body */
+  p.letter{
+    font-size: 19px;
+    line-height: 1.88;
+    margin-bottom: 26px;
+    text-align: justify;
+    hyphens: auto;
+    text-wrap: pretty;
+    color: var(--ink);
+  }
+  p.letter:first-of-type::first-letter{
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 80px;
+    float: left;
+    line-height: 0.82;
+    margin: 8px 10px 0 0;
+    color: var(--rose);
+  }
+  p.letter em{
+    font-style: italic;
+    color: var(--rose-deep);
+  }
+  p.letter strong{
+    font-weight: 600;
+    color: var(--rose-deep);
+  }
+
+  .divider{
+    text-align:center;
+    margin: 44px 0;
+    color: var(--rose-soft);
+    font-size: 20px;
+    letter-spacing: 0.6em;
+  }
+
+  /* verse block */
+  .verse{
+    margin: 56px auto;
+    max-width: 540px;
+    text-align: center;
+    padding: 36px 24px;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+  }
+  .verse .quote{
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 25px;
+    line-height: 1.45;
+    color: var(--rose-deep);
+    margin-bottom: 14px;
+  }
+  .verse .cite{
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--rose);
+  }
+  .verse::before{
+    content: "✿";
+    position: absolute;
+    top: -16px; left: 50%; transform: translateX(-50%);
+    background: #fdfaf6;
+    padding: 0 14px;
+    color: var(--rose);
+    font-size: 22px;
+  }
+
+  /* signature */
+  .signature-block{
+    margin-top: 72px;
+    text-align: right;
+  }
+  .signature-block .closing{
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+  }
+  .signature-block .name{
+    font-family: 'Pinyon Script', cursive;
+    font-size: 108px;
+    line-height: 0.8;
+    color: var(--rose-deep);
+    display: inline-block;
+    transform: rotate(-4deg);
+    padding-right: 20px;
+  }
+  .signature-block .forever{
+    margin-top: 18px;
+    font-style: italic;
+    color: var(--rose);
+    font-size: 18px;
+    letter-spacing: 0.1em;
+  }
+
+  .footer-ornament{
+    text-align:center;
+    margin-top: 80px;
+    color: var(--rose-soft);
+    font-size: 24px;
+    letter-spacing: 0.9em;
+    opacity: 0.8;
+  }
+
+  @media (max-width: 720px){
+    .sheet{ padding: 56px 28px 48px; }
+    .salutation{ font-size: 38px; }
+    .salutation em{ font-size: 60px; }
+    .signature-block .name{ font-size: 80px; }
+    p.letter{ font-size: 18px; text-align: left; }
+    p.letter:first-of-type::first-letter{ font-size: 62px; }
+    .portrait{ width: 160px; height: 160px; margin-top: -120px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="nav"><a href="../index.html">← Volver</a></div>
+
+<header class="envelope">
+  <div class="wax">🌹</div>
+  <div class="kicker">Día de las Madres · 2025</div>
+  <h1 class="salutation">
+    Feliz Día de la Madre,
+    <em>mi amor</em>
+  </h1>
+  <div class="date-line">Para Karina, mamá hermosa</div>
+</header>
+
+<article class="sheet">
+  <span class="corner tl">🌸</span>
+  <span class="corner tr">🌸</span>
+  <span class="corner bl">🌸</span>
+  <span class="corner br">🌸</span>
+
+  <div class="portrait" role="img" aria-label="Nosotros"></div>
+
+  <div class="opening-flourish">~ mi amor ~</div>
+  <p class="greeting">Feliz Día de la Madre,<br>amor de mi vida.</p>
+
+  <p class="letter">Quiero darte gracias por ser la mamá de nuestros hijos, por tu paciencia con ellos, por tu forma de cuidarlos, enseñarles y afirmarlos cada día. Mucho de lo que ellos son hoy es gracias a ti, a tus consejos, a tu sabiduría y al amor con que los crías.</p>
+
+  <p class="letter">También quiero que sepas que muchas veces tú me has enseñado e inspirado a ser un mejor papá. Creo que con Leitan hemos ido practicando, y ahora con Hada lo hacemos mejor. Jejeje.</p>
+
+  <div class="divider">· ✿ ·</div>
+
+  <p class="letter">Soy muy feliz de tenerte como esposa. Y no solo como esposa, sino también como alguien que muchas veces ha sido consuelo y sostén para mí. Nunca voy a olvidar que estuviste ahí el día que mi mamá partió. En ese momento tan difícil, tú consolaste mi corazón, y eso siempre lo voy a valorar.</p>
+
+  <p class="letter">Gracias, amor, por los hijos hermosos que me has dado. Gracias por todo lo que haces por ellos, por tu esfuerzo, por tu entrega y por ese <em>amor de madre</em> que se nota en cada detalle.</p>
+
+  <div class="verse">
+    <div class="quote">«Sus hijos se levantan y la llaman bienaventurada;<br>y su marido también la alaba.»</div>
+    <div class="cite">Proverbios 31:28</div>
+  </div>
+
+  <p class="letter">Hoy quiero felicitarte, reconocerte y decirte que <em>admiro mucho el trabajo que haces como mamá</em>. Sigue adelante, mi amor. Lo estás haciendo bien, y nosotros somos muy bendecidos de tenerte.</p>
+
+  <p class="letter">Te amo, te valoro y te deseo lo mejor siempre.</p>
+
+  <div class="signature-block">
+    <div class="closing">Feliz Día de la Madre, mi amor —</div>
+    <div class="name">Esdras</div>
+    <div class="forever">— con todo mi corazón —</div>
+  </div>
+
+  <div class="footer-ornament">· ✿ · 🌹 · ✿ ·</div>
+
+</article>
+
+<script src="../shared/petals.js"></script>
+<script>
+  createPetals({
+    count: 26,
+    colors: ['#e8a0b0', '#f2c4ce', '#c2516a', '#f7dde4', '#b8d4bc', '#fce4ec'],
+    zIndex: 3
+  });
+</script>
+
+</body>
+</html>
