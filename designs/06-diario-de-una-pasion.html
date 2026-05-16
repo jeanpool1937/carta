@@ -380,6 +380,7 @@
 </article>
 
 <script src="../shared/petals.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
   createPetals({
     count: 18,
@@ -388,41 +389,99 @@
   });
 
   (function(){
-    var KEY = 'diario-de-una-pasion';
+    var SUPABASE_URL = 'https://soevlirfkblxtetawgcv.supabase.co';
+    var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvZXZsaXJma2JseHRldGF3Z2N2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg5MTQ4MDQsImV4cCI6MjA4NDQ5MDgwNH0.KX0QnIJmBzagcVrZuGwsifyCzDzDs_X-M77_QVuc6vc';
+    var ROW_ID = 'main';
+    var LS_KEY = 'diario-de-una-pasion';
+
     var diary = document.getElementById('diary');
     var savedFlag = document.getElementById('savedFlag');
     var resetBtn = document.getElementById('resetBtn');
+    var hint = document.querySelector('.toolbar .hint');
     var original = diary.innerHTML;
-    var timer;
 
-    var stored = null;
-    try { stored = localStorage.getItem(KEY); } catch (e) {}
-    if (stored) diary.innerHTML = stored;
+    var sb = null;
+    try {
+      sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    } catch (e) { sb = null; }
 
-    function flashSaved(){
+    function setStatus(msg){ if (hint) hint.textContent = msg; }
+    var flagTimer;
+    function flashSaved(text){
+      savedFlag.textContent = text || 'Guardado ✓';
       savedFlag.classList.add('show');
-      clearTimeout(timer);
-      timer = setTimeout(function(){ savedFlag.classList.remove('show'); }, 1800);
+      clearTimeout(flagTimer);
+      flagTimer = setTimeout(function(){ savedFlag.classList.remove('show'); }, 2200);
+    }
+
+    function localGet(){ try { return localStorage.getItem(LS_KEY); } catch (e) { return null; } }
+    function localSet(v){ try { localStorage.setItem(LS_KEY, v); } catch (e) {} }
+    function localClear(){ try { localStorage.removeItem(LS_KEY); } catch (e) {} }
+
+    // ── Load: prefer the shared copy in Supabase, fall back to this device ──
+    function load(){
+      var cached = localGet();
+      if (cached) diary.innerHTML = cached;
+
+      if (!sb){
+        setStatus('✎ Sin conexión a la nube — se guarda solo en este dispositivo.');
+        return;
+      }
+      setStatus('Cargando nuestra historia…');
+      sb.from('diario').select('content').eq('id', ROW_ID).single()
+        .then(function(res){
+          if (res.error) throw res.error;
+          var remote = res.data && res.data.content ? res.data.content : '';
+          if (remote && remote.trim()){
+            diary.innerHTML = remote;
+            localSet(remote);
+          } else {
+            // First time: establish the shared copy from what we have here.
+            save(cached || original, true);
+          }
+          setStatus('✎ Toca el texto para escribir. Se guarda y sincroniza en la nube.');
+        })
+        .catch(function(){
+          setStatus('✎ No se pudo conectar a la nube — escribiendo en este dispositivo.');
+        });
+    }
+
+    // ── Save: write to Supabase + keep an offline copy ──
+    var saving = false, pending = false;
+    function save(html, silent){
+      localSet(html);
+      if (!sb){ if (!silent) flashSaved('Guardado en este dispositivo ✓'); return; }
+      if (saving){ pending = true; return; }
+      saving = true;
+      sb.from('diario').upsert({ id: ROW_ID, content: html, updated_at: new Date().toISOString() })
+        .then(function(res){
+          saving = false;
+          if (res.error){ if (!silent) flashSaved('Guardado local (sin nube) ✓'); }
+          else if (!silent){ flashSaved('Guardado y sincronizado ✓'); }
+          if (pending){ pending = false; save(diary.innerHTML, true); }
+        })
+        .catch(function(){
+          saving = false;
+          if (!silent) flashSaved('Guardado local (sin nube) ✓');
+          if (pending){ pending = false; save(diary.innerHTML, true); }
+        });
     }
 
     var debounce;
     diary.addEventListener('input', function(){
       clearTimeout(debounce);
-      debounce = setTimeout(function(){
-        try {
-          localStorage.setItem(KEY, diary.innerHTML);
-          flashSaved();
-        } catch (e) {}
-      }, 600);
+      debounce = setTimeout(function(){ save(diary.innerHTML, false); }, 700);
     });
 
     resetBtn.addEventListener('click', function(){
-      if (confirm('¿Restaurar el texto original? Se perderán los cambios guardados en este dispositivo.')) {
+      if (confirm('¿Restaurar el texto original? Esto reemplaza la historia compartida para ambos.')){
         diary.innerHTML = original;
-        try { localStorage.removeItem(KEY); } catch (e) {}
-        flashSaved();
+        localClear();
+        save(original, false);
       }
     });
+
+    load();
   })();
 </script>
 
