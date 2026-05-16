@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diario de una Pasión</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #1a0f26;
+    --bg-deep: #0f0720;
+    --ink: #efe4f5;
+    --ink-soft: #c3a9d4;
+    --mauve: #a97bc9;
+    --lilac: #d4a9e8;
+    --gold: #d4b572;
+    --gold-soft: #b89a5e;
+    --rule: rgba(212, 181, 114, 0.22);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{
+    background: var(--bg-deep);
+    color: var(--ink);
+    font-family: 'EB Garamond', serif;
+    font-size: 19px;
+    line-height: 1.85;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  body{
+    background:
+      radial-gradient(ellipse at 15% 10%, rgba(169, 123, 201, 0.18), transparent 55%),
+      radial-gradient(ellipse at 85% 90%, rgba(212, 181, 114, 0.1), transparent 55%),
+      linear-gradient(160deg, #1a0f26 0%, #0f0720 100%);
+    background-attachment: fixed;
+    padding: 60px 24px 120px;
+  }
+  body::before{
+    content:""; position: fixed; inset:0;
+    background-image:
+      radial-gradient(1px 1px at 18% 25%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1px 1px at 52% 72%, rgba(212, 181, 114, 0.4), transparent),
+      radial-gradient(1px 1px at 83% 18%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1.5px 1.5px at 34% 88%, rgba(212, 181, 114, 0.3), transparent),
+      radial-gradient(1px 1px at 72% 42%, rgba(255,255,255,0.4), transparent);
+    background-size: 700px 700px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ── NAV ── */
+  .nav{
+    position: fixed;
+    top: 24px; left: 24px;
+    z-index: 30;
+    font-family: 'EB Garamond', serif;
+    font-size: 13px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+  .nav a{
+    color: var(--lilac);
+    text-decoration: none;
+    padding: 8px 14px;
+    border: 1px solid var(--rule);
+    background: rgba(26,15,38,0.7);
+    backdrop-filter: blur(4px);
+    transition: all .3s;
+    display: inline-block;
+  }
+  .nav a:hover{ background: var(--mauve); color: var(--bg-deep); border-color: var(--mauve); }
+
+  /* ── HEADER ── */
+  .envelope{
+    max-width: 780px;
+    margin: 0 auto 48px;
+    position: relative;
+    z-index: 10;
+    text-align: center;
+  }
+  .crest{
+    width: 96px; height: 96px;
+    margin: 0 auto 28px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #c88ae0 0%, #7a4099 60%, #3a1655 100%);
+    box-shadow: inset -4px -6px 14px rgba(0,0,0,0.35), inset 4px 6px 12px rgba(255,255,255,0.12), 0 12px 32px rgba(74,37,102,0.4);
+    display:flex; align-items:center; justify-content:center;
+    font-size: 42px;
+  }
+  .kicker{
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .salutation{
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(44px, 7vw, 76px);
+    line-height: 1.05;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .salutation em{
+    font-family: 'Pinyon Script', cursive;
+    font-style: normal;
+    color: var(--mauve);
+    display: block;
+    line-height: 1;
+    margin-top: 6px;
+  }
+  .date-line{
+    display:flex; align-items:center; justify-content:center;
+    gap: 18px;
+    margin: 32px 0 8px;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .date-line::before, .date-line::after{
+    content:""; width: 60px; height:1px; background: var(--rule);
+  }
+
+  /* ── NOTE FOR HER ── */
+  .invite{
+    max-width: 620px;
+    margin: 0 auto 44px;
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 28px 32px;
+    border: 1px solid var(--rule);
+    background: linear-gradient(180deg, rgba(42,26,66,0.5), rgba(26,15,38,0.3));
+  }
+  .invite .label{
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .invite p{
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 1.5;
+    color: var(--lilac);
+  }
+
+  /* ── TOOLBAR ── */
+  .toolbar{
+    max-width: 780px;
+    margin: 0 auto 18px;
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .toolbar .hint{
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+  .toolbar .actions{ display:flex; gap: 10px; }
+  .btn{
+    font-family: 'EB Garamond', serif;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--lilac);
+    background: rgba(26,15,38,0.7);
+    border: 1px solid var(--rule);
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: all .3s;
+  }
+  .btn:hover{ background: var(--mauve); color: var(--bg-deep); border-color: var(--mauve); }
+  .saved-flag{
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--gold);
+    opacity: 0;
+    transition: opacity .4s;
+  }
+  .saved-flag.show{ opacity: 1; }
+
+  /* ── CARD SHEET ── */
+  .sheet{
+    max-width: 780px;
+    margin: 0 auto;
+    background: linear-gradient(180deg, rgba(42,26,66,0.55), rgba(26,15,38,0.4));
+    padding: 72px 68px 64px;
+    position: relative;
+    z-index: 10;
+    border: 1px solid var(--rule);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.45);
+  }
+  .sheet::before, .sheet::after{
+    content:""; position:absolute; left: 22px; right: 22px;
+    height: 1px; background: var(--rule);
+  }
+  .sheet::before{ top: 22px; }
+  .sheet::after{ bottom: 22px; }
+
+  .chapter-title{
+    text-align:center;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-style: italic;
+    font-size: 34px;
+    color: var(--lilac);
+    margin-bottom: 8px;
+  }
+  .chapter-flourish{
+    text-align:center;
+    color: var(--gold);
+    font-size: 18px;
+    letter-spacing: 0.6em;
+    margin-bottom: 44px;
+    opacity: 0.7;
+  }
+
+  /* editable area */
+  .diary{
+    outline: none;
+    transition: box-shadow .3s;
+    border-radius: 2px;
+  }
+  .diary:focus{
+    box-shadow: 0 0 0 1px var(--rule), 0 0 24px rgba(169,123,201,0.15);
+  }
+  .diary h3{
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 26px;
+    color: var(--lilac);
+    margin: 40px 0 18px;
+  }
+  .diary h3:first-child{ margin-top: 0; }
+  .diary p{
+    font-size: 19px;
+    line-height: 1.9;
+    margin-bottom: 24px;
+    text-align: justify;
+    hyphens: auto;
+    text-wrap: pretty;
+    color: var(--ink);
+  }
+  .diary p em{ font-style: italic; color: var(--lilac); }
+  .diary p strong{ font-weight: 600; color: var(--gold); }
+  .diary .closing-line{
+    text-align:center;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--ink-soft);
+    margin: 40px 0 0;
+  }
+
+  .divider{
+    text-align:center;
+    margin: 40px 0;
+    color: var(--mauve);
+    font-size: 18px;
+    letter-spacing: 0.6em;
+    opacity: 0.7;
+  }
+
+  .footer-ornament{
+    text-align:center;
+    margin-top: 72px;
+    color: var(--mauve);
+    font-size: 22px;
+    letter-spacing: 0.9em;
+    opacity: 0.7;
+  }
+
+  @media (max-width: 720px){
+    .sheet{ padding: 52px 26px 44px; }
+    .diary p{ font-size: 18px; text-align: left; }
+    .invite p{ font-size: 21px; }
+    .toolbar{ justify-content: center; text-align:center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="nav"><a href="../index.html">← Volver</a></div>
+
+<header class="envelope">
+  <div class="crest">📖</div>
+  <div class="kicker">Nuestra historia</div>
+  <h1 class="salutation">
+    Diario de una
+    <em>Pasión</em>
+  </h1>
+  <div class="date-line">Karina &amp; Esdras</div>
+</header>
+
+<section class="invite">
+  <div class="label">Una nota para mi esposa</div>
+  <p>Te invito a escribir esta historia juntos.</p>
+</section>
+
+<div class="toolbar">
+  <span class="hint">✎ Toca el texto para escribir. Se guarda solo en este dispositivo.</span>
+  <div class="actions">
+    <span class="saved-flag" id="savedFlag">Guardado ✓</span>
+    <button class="btn" id="resetBtn" type="button">Restaurar original</button>
+  </div>
+</div>
+
+<article class="sheet">
+
+  <div class="chapter-title">Capítulo I</div>
+  <div class="chapter-flourish">❦ · ❦ · ❦</div>
+
+  <div class="diary" id="diary" contenteditable="true" spellcheck="true">
+    <h3>Nuestro comienzo</h3>
+
+    <p>Nos conocimos un <strong>28 de julio del 2006</strong>, en un campamento de jóvenes realizado en el club <strong>7 de Agosto, en Ñaña</strong>.</p>
+
+    <p>Mi hermano Ronald fue quien me la presentó.</p>
+
+    <p>Desde el primer momento noté que Karina era diferente. No era egocéntrica, ni buscaba acaparar la conversación. Tampoco era indiferente. Al contrario, era empática, sencilla, amable, y tenía una forma muy natural de mostrarse amiga. Había en ella un carácter apacible que me llamó la atención.</p>
+
+    <p>Durante ese campamento conversamos, jugamos y reímos. Fueron momentos simples, pero muy especiales. Sin darme cuenta, algo empezó a nacer en mi corazón.</p>
+
+    <p>En los días siguientes, mi hermano me pidió que lo acompañara a visitarla a su casa. Ya era de noche, y ella salió en pijama. Ese detalle, aunque sencillo, me marcó mucho. Pensé: <em>"Ella no es una persona artificial, llena de apariencias. Se ve transparente y sincera."</em></p>
+
+    <p>En agosto cumplí 18 años, y ella vino junto con Rocío a celebrarlo en la iglesia. Desde entonces empezamos a encontrarnos en cada evento unido que organizaba la iglesia.</p>
+
+    <p>Era hermoso vivir ese tiempo de espera, porque cada encuentro creaba una expectativa especial: cómo sería volver a verla, qué conversaríamos, qué pasaría esta vez. Ella era muy tímida, pero eso me agradaba, porque me daba la oportunidad de tomar la iniciativa en nuestras conversaciones.</p>
+
+    <p>Karina asistía a la iglesia de Wise, donde regularmente vendían tamales para recaudar fondos. Poco a poco, la amistad y la confianza entre nosotros se fueron fortaleciendo. Sin decirlo abiertamente, parecía existir un acuerdo implícito de exclusividad. Cada vez que nos veíamos, ella estaba para mí, así como yo estaba para ella. No había tercero que pudiera apartar nuestras miradas.</p>
+
+    <p>En el verano del 2007, yo estudiaba en la UNI, y ella me pidió que la ayudara con clases de matemática. Así empezó a venir a mi casa por las tardes. Para mí, esos momentos eran una bendición. Podía compartir con ella, enseñarle, conversar y simplemente disfrutar de su compañía.</p>
+
+    <p>El 14 de febrero le escribí una carta porque la consideraba mi mejor amiga. Para ese entonces, yo la iba a recoger al paradero del 3 cuando regresaba de la iglesia. Disfrutaba muchísimo estar con ella. Con Karina podía ser yo mismo, sin tener que aparentar nada. Podía mostrar mis defectos, mis torpezas y mis inseguridades, y aun así sentirme aceptado. Ella no se ofendía ni me juzgaba. Me brindaba una atención que yo necesitaba mucho, y eso me hacía sentir querido.</p>
+
+    <p>Ese mismo verano llegaron unos misioneros de JOCUM. Entre ellos estaba Graciette, quien apoyaba tanto a mi iglesia en San Lorenzo como a la iglesia de Wise, donde asistía Karina. Ella se dio cuenta de nuestra complicidad. Un día me preguntó si yo sentía algo por Karina, porque, según ella, Karina también sentía algo por mí.</p>
+
+    <p>Entonces le confesé que sí.</p>
+
+    <p>Con el tiempo me enteré de que todo había sido parte de un plan de Graciette, porque también había hablado con Karina. Ella había notado cómo nuestras miradas se cruzaban. Era algo evidente para los demás, aunque a nosotros nos costaba aceptarlo y decirlo.</p>
+
+    <p>Antes de irse, Graciette nos dijo: <em>"Me invitan a la boda."</em> Y, aunque parecía solo una frase, cinco años después nos casamos. Para mí, esas palabras fueron como una profecía. Las tomé muy en serio. Doy gracias a Dios por ella, porque fue quien nos impulsó a acercarnos más y afirmó en mi corazón que Karina era la mujer que Dios tenía para mi vida.</p>
+
+    <p>Poco tiempo después le escribí una carta a Karina. La invité a pasear al parque del 7, y allí le entregué esa carta donde le confesaba lo que sentía por ella. Le pedí que fuéramos más que amigos; en ese tiempo se decía "amigos especiales".</p>
+
+    <p>Ese día ella también me confesó su amor y respondió afirmativamente a mi propuesta. Nos abrazamos. A partir de entonces, todo fue oficial. Yo quedé ligado a ella, así como siento que su alma quedó ligada a la mía.</p>
+
+    <p>Tiempo después nos presentamos a nuestros padres. Recuerdo que fui a su casa para pedirle permiso a su madre, con mucho respeto, para poder ser amigos y salir con su hija. También recuerdo que, regresando de un evento unido, le presenté Karina a mi mamá. Caminábamos desde el paradero del 3 hacia mi casa, y como ella vivía cerca, compartíamos la misma ruta. Le dije: <em>"Mami, te presento a mi amiga Karina."</em></p>
+
+    <p>Nuestro primer viaje juntos fue un sábado. La invité a pasear a Chosica, al club Las Gambusinas. Fuimos los dos solos. Allí tomé su mano para cruzar un puente, usando como excusa que quería cuidarla para que no se cayera.</p>
+
+    <p>Pero desde ese día ya no pude dejar de tomar su mano.</p>
+
+    <p>Era como si una corriente eléctrica recorriera mi cuerpo cada vez que la tomaba. Había una conexión muy especial entre nosotros. Algo tan simple como tomar su mano se sentía profundamente hermoso. Y desde entonces, supe que estar a su lado era uno de los regalos más preciosos que Dios me había dado.</p>
+
+    <p class="closing-line">Esta historia continuará…</p>
+  </div>
+
+  <div class="footer-ornament">· ❦ · 📖 · ❦ ·</div>
+
+</article>
+
+<script src="../shared/petals.js"></script>
+<script>
+  createPetals({
+    count: 18,
+    colors: ['#a97bc9', '#d4b572', '#d4a9e8'],
+    zIndex: 2
+  });
+
+  (function(){
+    var KEY = 'diario-de-una-pasion';
+    var diary = document.getElementById('diary');
+    var savedFlag = document.getElementById('savedFlag');
+    var resetBtn = document.getElementById('resetBtn');
+    var original = diary.innerHTML;
+    var timer;
+
+    var stored = null;
+    try { stored = localStorage.getItem(KEY); } catch (e) {}
+    if (stored) diary.innerHTML = stored;
+
+    function flashSaved(){
+      savedFlag.classList.add('show');
+      clearTimeout(timer);
+      timer = setTimeout(function(){ savedFlag.classList.remove('show'); }, 1800);
+    }
+
+    var debounce;
+    diary.addEventListener('input', function(){
+      clearTimeout(debounce);
+      debounce = setTimeout(function(){
+        try {
+          localStorage.setItem(KEY, diary.innerHTML);
+          flashSaved();
+        } catch (e) {}
+      }, 600);
+    });
+
+    resetBtn.addEventListener('click', function(){
+      if (confirm('¿Restaurar el texto original? Se perderán los cambios guardados en este dispositivo.')) {
+        diary.innerHTML = original;
+        try { localStorage.removeItem(KEY); } catch (e) {}
+        flashSaved();
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>
