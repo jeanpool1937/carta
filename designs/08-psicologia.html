@@ -114,6 +114,26 @@
     border:1px solid var(--line);
     pointer-events:none;
   }
+  .memory{
+    position:relative;
+    max-width:640px;
+    margin:0 auto 42px;
+  }
+  .memory img{
+    display:block;
+    width:100%;
+    height:auto;
+    max-height:680px;
+    object-fit:cover;
+    border:10px solid #fffaf3;
+    box-shadow:0 14px 28px rgba(52,38,59,.18),0 0 0 1px var(--line);
+  }
+  .memory figcaption{
+    margin-top:12px;
+    color:var(--ink-soft);
+    text-align:center;
+    font:italic 16px 'Cormorant Garamond',serif;
+  }
   .date{
     position:relative;
     text-align:right;
@@ -187,6 +207,10 @@
     </header>
 
     <article class="sheet">
+      <figure class="memory">
+        <img src="../uploads/carta-psicologia.jpg" alt="Esdras y Karina frente al mar">
+        <figcaption>Un recuerdo nuestro para acompañar este nuevo comienzo.</figcaption>
+      </figure>
       <div class="date">Con todo mi amor</div>
       <div class="letter">
         <p>Mi amor:</p>
