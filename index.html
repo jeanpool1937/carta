@@ -237,18 +237,229 @@
     display: block;
   }
 
+
+  .letter-card:focus-visible{
+    outline: 2px solid var(--gold);
+    outline-offset: 5px;
+  }
+
+  .mobile-index-heading{
+    display: none;
+  }
+
   @media (max-width: 720px){
-    main{ padding: 80px 24px; }
-    .letter-card{
-      grid-template-columns: 1fr;
-      gap: 16px;
-      padding: 32px 28px;
-      text-align: center;
+    main{
+      max-width: 520px;
+      padding: 24px 14px 32px;
     }
-    .letter-card .numeral{ font-size: 72px; }
-    .letter-card .info h2{ font-size: 28px; }
-    .letter-card .info .opening{ margin: 0 auto; }
-    .letter-card .arrow{ display: none; }
+
+    .hero{
+      margin-bottom: 0;
+    }
+    .crest{
+      width: 48px;
+      height: 48px;
+      margin-bottom: 12px;
+      font-size: 31px;
+      box-shadow: inset -3px -4px 10px rgba(0,0,0,0.3), inset 3px 4px 9px rgba(255,255,255,0.1), 0 8px 22px rgba(74,37,102,0.35);
+    }
+    .hero .eyebrow{
+      margin-bottom: 8px;
+      font-size: 10px;
+      letter-spacing: 0.34em;
+    }
+    .hero h1{
+      font-size: clamp(34px, 10vw, 44px);
+      line-height: 1;
+      margin: 0;
+      white-space: nowrap;
+    }
+    .hero h1 em{
+      display: inline;
+      margin: 0 0 0 0.08em;
+      font-size: 1em;
+    }
+    .hero .dedication{
+      max-width: 360px;
+      margin-top: 12px;
+      font-size: 15.5px;
+      line-height: 1.35;
+    }
+
+    .divider{
+      margin: 15px 0 11px;
+      font-size: 10px;
+      letter-spacing: 0.48em;
+    }
+
+    .mobile-index-heading{
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 10px;
+      padding: 0 2px;
+    }
+    .mobile-index-heading .label{
+      display: block;
+      margin-bottom: 2px;
+      color: var(--gold);
+      font-size: 8px;
+      font-style: italic;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+    }
+    .mobile-index-heading h2{
+      color: var(--ink);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 23px;
+      font-weight: 400;
+      line-height: 1;
+    }
+    .mobile-index-heading .count{
+      padding-bottom: 2px;
+      color: var(--ink-soft);
+      font-size: 11px;
+      font-style: italic;
+      white-space: nowrap;
+    }
+
+    .letters{
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 9px;
+    }
+    .letter-card{
+      display: block;
+      min-width: 0;
+      min-height: 102px;
+      padding: 12px;
+      text-align: left;
+      background: linear-gradient(145deg, rgba(50,31,75,0.64), rgba(24,13,36,0.62));
+      border-color: rgba(212,181,114,0.24);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.16);
+    }
+    .letter-card::before{
+      opacity: 0.55;
+    }
+    .letter-card:hover{
+      transform: none;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.16);
+    }
+    .letter-card:active{
+      transform: scale(0.98);
+      border-color: var(--gold);
+    }
+    .letter-card .numeral{
+      position: absolute;
+      top: 7px;
+      right: 10px;
+      z-index: 0;
+      font-size: 38px;
+      line-height: 1;
+      opacity: 0.46;
+    }
+    .letter-card .info{
+      position: relative;
+      z-index: 1;
+    }
+    .letter-card .info .whisper{
+      min-height: 19px;
+      margin-bottom: 11px;
+      padding-right: 31px;
+      font-size: 8px;
+      line-height: 1.15;
+      letter-spacing: 0.15em;
+    }
+    .letter-card .info h2{
+      margin: 0;
+      font-size: 16.5px;
+      line-height: 1.05;
+    }
+    .letter-card .info .opening,
+    .letter-card .arrow{
+      display: none;
+    }
+    .letter-card:last-child{
+      border-color: rgba(212,181,114,0.72);
+      background:
+        linear-gradient(145deg, rgba(90,55,111,0.72), rgba(35,19,49,0.78));
+      box-shadow: inset 0 2px 0 rgba(212,181,114,0.7), 0 12px 28px rgba(0,0,0,0.24);
+    }
+    .letter-card:last-child .numeral{
+      color: var(--gold);
+      opacity: 0.68;
+    }
+
+    footer{
+      margin-top: 28px;
+      font-size: 13px;
+    }
+    footer .sig{
+      margin-top: 7px;
+      font-size: 32px;
+    }
+  }
+
+  @media (max-width: 365px){
+    main{
+      padding: 20px 10px 28px;
+    }
+    .hero .dedication{
+      font-size: 14.5px;
+    }
+    .letters{
+      gap: 7px;
+    }
+    .letter-card{
+      min-height: 98px;
+      padding: 10px;
+    }
+    .letter-card .info h2{
+      font-size: 15.5px;
+    }
+  }
+
+  @media (min-width: 560px) and (max-width: 720px){
+    main{
+      max-width: 700px;
+    }
+    .letters{
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 720px) and (max-height: 700px){
+    main{
+      padding-top: 16px;
+    }
+    .crest{
+      width: 42px;
+      height: 42px;
+      margin-bottom: 8px;
+      font-size: 28px;
+    }
+    .hero .eyebrow{
+      margin-bottom: 5px;
+    }
+    .hero .dedication{
+      margin-top: 8px;
+      font-size: 14px;
+      line-height: 1.25;
+    }
+    .divider{
+      margin: 10px 0 8px;
+    }
+    .mobile-index-heading{
+      margin-bottom: 8px;
+    }
+    .letter-card{
+      min-height: 91px;
+      padding: 10px;
+    }
+    footer{
+      margin-top: 18px;
+    }
   }
 </style>
 </head>
@@ -265,7 +476,15 @@
 
   <div class="divider">❦ · ❦ · ❦</div>
 
-  <section class="letters">
+  <div class="mobile-index-heading" aria-hidden="true">
+    <div>
+      <span class="label">Archivo íntimo</span>
+      <h2>Elige una carta</h2>
+    </div>
+    <span class="count">8 cartas</span>
+  </div>
+
+  <section class="letters" aria-label="Cartas para Karina">
 
     <a class="letter-card" href="designs/02-libro-abierto.html">
       <div class="numeral">I</div>
