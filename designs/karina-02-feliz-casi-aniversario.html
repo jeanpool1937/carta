@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Un mensaje de Karina para Esdras, guardado en vísperas de su aniversario.">
+<title>Feliz casi aniversario · De Karina para Esdras</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400;1,500&family=EB+Garamond:ital,wght@0,400;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night:#100b19;
+    --night-soft:#1c1225;
+    --paper:#281a32;
+    --ink:#f4eaf6;
+    --ink-soft:#ccb9d3;
+    --mauve:#b98ac9;
+    --gold:#d7ba78;
+    --rule:rgba(215,186,120,.28);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    min-height:100vh;
+    overflow-x:hidden;
+    color:var(--ink);
+    font-family:'EB Garamond',serif;
+    background:
+      radial-gradient(ellipse at 16% 8%,rgba(185,138,201,.2),transparent 38%),
+      radial-gradient(ellipse at 86% 92%,rgba(215,186,120,.12),transparent 40%),
+      linear-gradient(155deg,var(--night-soft),var(--night));
+  }
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background-image:
+      radial-gradient(1px 1px at 12% 20%,rgba(255,255,255,.65),transparent),
+      radial-gradient(1px 1px at 31% 68%,rgba(215,186,120,.55),transparent),
+      radial-gradient(1.5px 1.5px at 67% 16%,rgba(255,255,255,.5),transparent),
+      radial-gradient(1px 1px at 84% 44%,rgba(255,255,255,.6),transparent),
+      radial-gradient(1px 1px at 54% 87%,rgba(215,186,120,.45),transparent);
+    background-size:420px 420px;
+    opacity:.72;
+  }
+  .back{
+    position:fixed;
+    top:20px;
+    left:20px;
+    z-index:5;
+    color:var(--ink-soft);
+    font-size:11px;
+    letter-spacing:.25em;
+    text-decoration:none;
+    text-transform:uppercase;
+    transition:color .25s,transform .25s;
+  }
+  .back:hover{color:var(--gold);transform:translateX(-3px)}
+  .back:focus-visible{outline:2px solid var(--gold);outline-offset:7px}
+  main{
+    position:relative;
+    z-index:1;
+    width:min(100% - 32px,760px);
+    margin:0 auto;
+    padding:96px 0 80px;
+  }
+  .direction{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    margin-bottom:26px;
+    color:var(--gold);
+    font-size:11px;
+    font-style:italic;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+  }
+  .direction::before,.direction::after{
+    content:"";
+    width:48px;
+    height:1px;
+    background:var(--rule);
+  }
+  article{
+    position:relative;
+    overflow:hidden;
+    padding:64px 72px 72px;
+    border:1px solid var(--rule);
+    background:
+      radial-gradient(ellipse at top left,rgba(185,138,201,.11),transparent 50%),
+      linear-gradient(165deg,rgba(45,29,58,.94),rgba(26,16,35,.96));
+    box-shadow:0 36px 90px rgba(5,2,11,.55),inset 0 1px rgba(255,255,255,.035);
+  }
+  article::before{
+    content:"♡";
+    position:absolute;
+    top:-30px;
+    right:30px;
+    color:rgba(185,138,201,.11);
+    font-family:'Pinyon Script',cursive;
+    font-size:220px;
+    line-height:1;
+    pointer-events:none;
+  }
+  .meta{
+    position:relative;
+    z-index:1;
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:24px;
+    align-items:start;
+    padding-bottom:28px;
+    border-bottom:1px solid var(--rule);
+  }
+  .meta small{
+    display:block;
+    margin-bottom:5px;
+    color:var(--gold);
+    font-size:9px;
+    letter-spacing:.27em;
+    text-transform:uppercase;
+  }
+  .meta strong{
+    display:block;
+    color:var(--ink);
+    font-family:'Cormorant Garamond',serif;
+    font-size:24px;
+    font-weight:400;
+  }
+  .date{
+    color:var(--ink-soft);
+    font-size:13px;
+    font-style:italic;
+    text-align:right;
+  }
+  .number{
+    margin-top:40px;
+    color:var(--gold);
+    font-size:10px;
+    font-style:italic;
+    letter-spacing:.3em;
+    text-transform:uppercase;
+  }
+  h1{
+    max-width:560px;
+    margin:10px 0 38px;
+    color:var(--ink);
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(50px,9vw,84px);
+    font-weight:300;
+    letter-spacing:-.035em;
+    line-height:.9;
+    text-wrap:balance;
+  }
+  h1 em{
+    display:block;
+    color:var(--mauve);
+    font-family:'Pinyon Script',cursive;
+    font-size:.88em;
+    font-style:normal;
+    letter-spacing:0;
+    line-height:1.05;
+  }
+  .message{
+    position:relative;
+    z-index:1;
+    max-width:540px;
+    margin:0 auto;
+    padding-left:28px;
+    border-left:1px solid var(--rule);
+  }
+  .note{
+    margin-bottom:26px;
+    color:var(--ink-soft);
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(22px,4vw,28px);
+    font-style:italic;
+    line-height:1.38;
+    text-wrap:pretty;
+  }
+  .note.greeting{
+    margin-bottom:30px;
+    color:var(--ink);
+    font-size:clamp(27px,4.8vw,35px);
+  }
+  .note strong{
+    color:var(--ink);
+    font-weight:500;
+  }
+  .note:last-child{
+    margin-bottom:0;
+    color:var(--gold);
+  }
+  .signoff{
+    position:relative;
+    z-index:1;
+    margin-top:44px;
+    padding-top:28px;
+    border-top:1px solid var(--rule);
+    color:var(--ink-soft);
+    font-size:15px;
+    font-style:italic;
+  }
+  .signature{
+    display:block;
+    margin-top:8px;
+    color:var(--mauve);
+    font-family:'Pinyon Script',cursive;
+    font-size:66px;
+    font-style:normal;
+    line-height:.8;
+  }
+  .keepsake{
+    max-width:520px;
+    margin:32px auto 0;
+    color:rgba(203,184,211,.72);
+    font-family:'Cormorant Garamond',serif;
+    font-size:16px;
+    font-style:italic;
+    line-height:1.5;
+    text-align:center;
+    text-wrap:pretty;
+  }
+  @media(max-width:600px){
+    .back{top:14px;left:14px}
+    main{
+      width:min(100% - 22px,520px);
+      padding:62px 0 48px;
+    }
+    .direction{margin-bottom:16px;font-size:9px}
+    .direction::before,.direction::after{width:24px}
+    article{padding:34px 24px 40px}
+    .meta{grid-template-columns:1fr;gap:10px;padding-bottom:20px}
+    .meta strong{font-size:20px}
+    .date{text-align:left}
+    .number{margin-top:27px}
+    h1{margin-bottom:27px;font-size:clamp(46px,16vw,67px)}
+    .message{padding-left:18px}
+    .note{font-size:22px;margin-bottom:20px}
+    .note.greeting{font-size:26px;margin-bottom:23px}
+    .signature{font-size:56px}
+    .keepsake{margin-top:22px;padding:0 12px;font-size:15px}
+  }
+</style>
+</head>
+<body>
+<a class="back" href="../index.html#para-esdras">← Volver a los mensajes</a>
+
+<main>
+  <div class="direction">De Karina para Esdras</div>
+
+  <article>
+    <header class="meta">
+      <div>
+        <small>Para</small>
+        <strong>Esdras, mi amor</strong>
+      </div>
+      <time class="date" datetime="2026-08-23">23 de agosto de 2026</time>
+    </header>
+
+    <div class="number">Mensaje n.º 02</div>
+    <h1>Feliz casi aniversario, <em>mi amor</em></h1>
+
+    <div class="message">
+      <p class="note greeting">Querido Esdras,<br><strong>Feliz casi aniversario, mi amor.</strong></p>
+
+      <p class="note">Hoy quiero darte las gracias por creer en mí y por caminar a mi lado. Le agradezco a Dios por tu vida y por el hermoso matrimonio que nos regala.</p>
+
+      <p class="note">Eres mi gran bendición y mi mejor equipo. Que el Señor siga guiando nuestros pasos y fortaleciendo nuestro amor cada día más.</p>
+
+      <p class="note">Te amo con todo mi corazón. 🫶 😘</p>
+    </div>
+
+    <footer class="signoff">
+      Con todo mi amor,
+      <span class="signature">Karina</span>
+    </footer>
+  </article>
+
+  <p class="keepsake">Guardado para recordar, en cada aniversario, la bendición de seguir caminando juntos.</p>
+</main>
+</body>
+</html>
