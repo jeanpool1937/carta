@@ -238,6 +238,120 @@
   }
 
 
+
+  /* COLLECTIONS */
+  .collection-nav{
+    display:flex;
+    justify-content:center;
+    margin:-18px auto 58px;
+    border-bottom:1px solid var(--rule);
+  }
+  .collection-nav a{
+    position:relative;
+    min-width:240px;
+    padding:14px 26px 16px;
+    color:var(--ink-soft);
+    text-align:center;
+    text-decoration:none;
+    transition:color .25s,background .25s;
+  }
+  .collection-nav a:hover{
+    color:var(--ink);
+    background:rgba(169,123,201,.06);
+  }
+  .collection-nav a::after{
+    content:"";
+    position:absolute;
+    right:26px;
+    bottom:-1px;
+    left:26px;
+    height:1px;
+    background:var(--gold);
+    transform:scaleX(0);
+    transition:transform .25s;
+  }
+  .collection-nav a:hover::after{
+    transform:scaleX(1);
+  }
+  .collection-nav span,
+  .collection-nav small{
+    display:block;
+  }
+  .collection-nav span{
+    margin-bottom:3px;
+    color:var(--gold);
+    font-size:9px;
+    font-style:italic;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+  }
+  .collection-nav strong{
+    font-family:'Cormorant Garamond',serif;
+    font-size:21px;
+    font-weight:400;
+  }
+  .collection-nav small{
+    margin-top:2px;
+    font-size:11px;
+    font-style:italic;
+  }
+  .collection-nav a:focus-visible{
+    outline:2px solid var(--gold);
+    outline-offset:5px;
+  }
+
+  .received-section{
+    margin-top:120px;
+    scroll-margin-top:36px;
+  }
+  .received-heading{
+    max-width:680px;
+    margin:0 auto 36px;
+    text-align:center;
+  }
+  .received-heading .kicker{
+    display:block;
+    margin-bottom:10px;
+    color:var(--gold);
+    font-size:11px;
+    font-style:italic;
+    letter-spacing:.32em;
+    text-transform:uppercase;
+  }
+  .received-heading h2{
+    margin-bottom:10px;
+    color:var(--ink);
+    font-family:'Cormorant Garamond',serif;
+    font-size:52px;
+    font-weight:300;
+    letter-spacing:-.025em;
+    line-height:1;
+    text-wrap:balance;
+  }
+  .received-heading p{
+    color:var(--ink-soft);
+    font-family:'Cormorant Garamond',serif;
+    font-size:18px;
+    font-style:italic;
+    line-height:1.45;
+    text-wrap:pretty;
+  }
+  .received-notes{
+    max-width:900px;
+    margin:0 auto;
+  }
+  .received-card{
+    background:
+      radial-gradient(ellipse at top right,rgba(212,181,114,.09),transparent 52%),
+      linear-gradient(180deg,rgba(52,31,66,.62),rgba(26,15,38,.46));
+  }
+  .received-card .numeral{
+    color:var(--gold);
+  }
+  .received-card .info .whisper{
+    letter-spacing:.27em;
+  }
+
   .letter-card:focus-visible{
     outline: 2px solid var(--gold);
     outline-offset: 5px;
@@ -251,6 +365,10 @@
     main{
       max-width: 520px;
       padding: 24px 14px 32px;
+    }
+
+    .collection-nav{
+      display:none;
     }
 
     .hero{
@@ -380,15 +498,48 @@
     .letter-card .arrow{
       display: none;
     }
-    .letter-card:last-child{
+    .letters > .letter-card:last-child{
       border-color: rgba(212,181,114,0.72);
       background:
         linear-gradient(145deg, rgba(90,55,111,0.72), rgba(35,19,49,0.78));
       box-shadow: inset 0 2px 0 rgba(212,181,114,0.7), 0 12px 28px rgba(0,0,0,0.24);
     }
-    .letter-card:last-child .numeral{
+    .letters > .letter-card:last-child .numeral{
       color: var(--gold);
       opacity: 0.68;
+    }
+
+    .received-section{
+      margin-top:34px;
+      padding-top:24px;
+      border-top:1px solid var(--rule);
+    }
+    .received-heading{
+      margin:0 2px 12px;
+      text-align:left;
+    }
+    .received-heading .kicker{
+      margin-bottom:4px;
+      font-size:8px;
+      letter-spacing:.22em;
+    }
+    .received-heading h2{
+      margin-bottom:5px;
+      font-size:25px;
+    }
+    .received-heading p{
+      max-width:390px;
+      font-size:14px;
+      line-height:1.3;
+    }
+    .received-card{
+      min-height:106px;
+      border-color:rgba(212,181,114,.6);
+      box-shadow:inset 0 2px 0 rgba(212,181,114,.55),0 12px 28px rgba(0,0,0,.22);
+    }
+    .received-card .numeral{
+      color:var(--gold);
+      opacity:.7;
     }
 
     footer{
@@ -476,6 +627,19 @@
 
   <div class="divider">❦ · ❦ · ❦</div>
 
+  <nav class="collection-nav" aria-label="Colecciones de cartas">
+    <a href="#para-karina">
+      <span>De Esdras</span>
+      <strong>Para Karina</strong>
+      <small>8 cartas</small>
+    </a>
+    <a href="#para-esdras">
+      <span>De Karina</span>
+      <strong>Para Esdras</strong>
+      <small>1 mensaje</small>
+    </a>
+  </nav>
+
   <div class="mobile-index-heading" aria-hidden="true">
     <div>
       <span class="label">Archivo íntimo</span>
@@ -484,7 +648,7 @@
     <span class="count">8 cartas</span>
   </div>
 
-  <section class="letters" aria-label="Cartas para Karina">
+  <section class="letters" id="para-karina" aria-label="Cartas de Esdras para Karina">
 
     <a class="letter-card" href="designs/02-libro-abierto.html">
       <div class="numeral">I</div>
@@ -566,6 +730,26 @@
       <div class="arrow">→</div>
     </a>
 
+  </section>
+
+  <section class="received-section" id="para-esdras" aria-labelledby="received-title">
+    <header class="received-heading">
+      <span class="kicker">De Karina para Esdras · 1 mensaje</span>
+      <h2 id="received-title">Palabras que me sostienen</h2>
+      <p>Sus mensajes cortos, guardados para volver a ellos cuando necesite ánimo y recordar que caminamos juntos.</p>
+    </header>
+
+    <div class="received-notes">
+      <a class="letter-card received-card" href="designs/karina-01-contigo-hasta-el-final.html">
+        <div class="numeral">I</div>
+        <div class="info">
+          <div class="whisper">26 de agosto de 2026 · Primer mensaje</div>
+          <h2>Contigo <em>hasta el final</em></h2>
+          <p class="opening">«Si regresamos al inicio, te escogería una vez más. En el gozo, en el duelo y en el horno de fuego…»</p>
+        </div>
+        <div class="arrow">→</div>
+      </a>
+    </div>
   </section>
 
   <footer>
