@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Mujer virtuosa, una canción de Esdras para Karina inspirada en su amor, su fe y la historia que Dios sigue escribiendo en sus vidas.">
+<title>Mujer Virtuosa · Canción para Karina</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night:#0d0714;
+    --plum:#24112f;
+    --plum-soft:#3b2148;
+    --paper:#fcf7ef;
+    --ink:#33253a;
+    --ink-soft:#76667a;
+    --lilac:#c9a5d8;
+    --violet:#8556a0;
+    --gold:#d4b572;
+    --gold-soft:#ead7aa;
+    --line:rgba(212,181,114,.35);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    min-height:100vh;
+    color:var(--paper);
+    background:
+      radial-gradient(circle at 12% 10%,rgba(201,165,216,.18),transparent 32%),
+      radial-gradient(circle at 88% 68%,rgba(212,181,114,.12),transparent 34%),
+      linear-gradient(150deg,var(--plum),var(--night) 70%);
+    font-family:'EB Garamond',serif;
+    overflow-x:hidden;
+  }
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    opacity:.42;
+    background-image:
+      radial-gradient(1px 1px at 18% 24%,#fff,transparent),
+      radial-gradient(1px 1px at 74% 14%,#fff,transparent),
+      radial-gradient(1px 1px at 62% 76%,rgba(212,181,114,.9),transparent),
+      radial-gradient(1px 1px at 29% 88%,rgba(201,165,216,.9),transparent);
+    background-size:680px 680px;
+  }
+  .nav{
+    position:relative;
+    z-index:3;
+    max-width:980px;
+    margin:0 auto;
+    padding:32px 28px 0;
+  }
+  .nav a{
+    color:var(--lilac);
+    text-decoration:none;
+    font:italic 17px 'Cormorant Garamond',serif;
+    transition:color .25s;
+  }
+  .nav a:hover{color:var(--gold)}
+  main{
+    position:relative;
+    z-index:2;
+    max-width:980px;
+    margin:0 auto;
+    padding:58px 28px 110px;
+  }
+  .hero{text-align:center}
+  .eyebrow{
+    color:var(--gold);
+    text-transform:uppercase;
+    letter-spacing:.36em;
+    font:italic 12px 'EB Garamond',serif;
+    margin-bottom:20px;
+  }
+  h1{
+    color:var(--paper);
+    font:400 clamp(48px,8vw,86px)/.92 'Cormorant Garamond',serif;
+    letter-spacing:-.025em;
+  }
+  h1 em{
+    display:block;
+    color:var(--lilac);
+    font:normal .72em/1.15 'Pinyon Script',cursive;
+    margin-top:10px;
+  }
+  .dedication{
+    max-width:600px;
+    margin:28px auto 42px;
+    color:#d7c6dc;
+    font:italic 21px/1.5 'Cormorant Garamond',serif;
+  }
+  .record-stage{
+    position:relative;
+    display:grid;
+    grid-template-columns:190px minmax(0,1fr);
+    align-items:center;
+    gap:34px;
+    max-width:760px;
+    margin:0 auto 52px;
+    padding:26px;
+    text-align:left;
+    border:1px solid rgba(212,181,114,.25);
+    background:linear-gradient(135deg,rgba(59,33,72,.74),rgba(20,10,29,.78));
+    box-shadow:0 26px 60px rgba(0,0,0,.34);
+    backdrop-filter:blur(8px);
+  }
+  .disc{
+    width:160px;
+    aspect-ratio:1;
+    margin:auto;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    background:
+      radial-gradient(circle at center,var(--gold) 0 5%,#f0dcae 5.5% 14%,#6f3d82 14.5% 16%,transparent 16.5%),
+      repeating-radial-gradient(circle at center,#19121d 0 3px,#0e0911 4px 7px);
+    box-shadow:0 16px 36px rgba(0,0,0,.42),inset 0 0 0 1px rgba(255,255,255,.08);
+  }
+  .disc::after{
+    content:"K";
+    color:#35223b;
+    font:34px 'Pinyon Script',cursive;
+    transform:translateY(-1px);
+  }
+  .is-playing .disc{animation:spin 7s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .player-copy .small{
+    color:var(--gold);
+    text-transform:uppercase;
+    letter-spacing:.28em;
+    font-size:11px;
+    margin-bottom:8px;
+  }
+  .player-copy h2{
+    color:var(--paper);
+    font:400 31px/1.05 'Cormorant Garamond',serif;
+    margin-bottom:6px;
+  }
+  .player-copy .artist{
+    color:var(--lilac);
+    font:italic 17px 'Cormorant Garamond',serif;
+    margin-bottom:18px;
+  }
+  audio{width:100%;height:44px;accent-color:var(--violet)}
+  .play-hint{
+    display:none;
+    width:100%;
+    margin-top:12px;
+    border:1px solid var(--gold);
+    padding:11px 16px;
+    color:#24152c;
+    background:var(--gold-soft);
+    font:600 15px 'EB Garamond',serif;
+    cursor:pointer;
+  }
+  .autoplay-blocked .play-hint{display:block}
+  .status{
+    min-height:20px;
+    margin-top:9px;
+    color:#cbb9d0;
+    font:italic 14px 'Cormorant Garamond',serif;
+  }
+  .download{
+    display:inline-block;
+    margin-top:8px;
+    color:var(--gold-soft);
+    font-size:14px;
+  }
+  .lyrics-sheet{
+    position:relative;
+    max-width:780px;
+    margin:0 auto;
+    padding:clamp(42px,7vw,78px) clamp(28px,9vw,92px);
+    color:var(--ink);
+    background:
+      radial-gradient(circle at 15% 8%,rgba(212,181,114,.13),transparent 28%),
+      linear-gradient(135deg,#fffaf3,var(--paper));
+    box-shadow:0 30px 74px rgba(0,0,0,.44);
+  }
+  .lyrics-sheet::before{
+    content:"";
+    position:absolute;
+    inset:17px;
+    border:1px solid var(--line);
+    pointer-events:none;
+  }
+  .lyrics-title{
+    position:relative;
+    text-align:center;
+    margin-bottom:50px;
+  }
+  .lyrics-title span{
+    display:block;
+    color:var(--violet);
+    text-transform:uppercase;
+    letter-spacing:.34em;
+    font-size:11px;
+    margin-bottom:10px;
+  }
+  .lyrics-title h2{
+    color:var(--ink);
+    font:400 clamp(38px,6vw,56px)/1 'Cormorant Garamond',serif;
+  }
+  .section{
+    position:relative;
+    margin:0 auto 38px;
+    max-width:590px;
+    text-align:center;
+  }
+  .section:last-child{margin-bottom:0}
+  .section-label{
+    color:var(--gold);
+    text-transform:uppercase;
+    letter-spacing:.3em;
+    font-size:10px;
+    margin-bottom:13px;
+  }
+  .section p{
+    color:var(--ink);
+    font:400 20px/1.62 'EB Garamond',serif;
+    white-space:pre-line;
+  }
+  .section.chorus{
+    padding:28px 22px;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+  .section.chorus p{
+    color:var(--violet);
+    font:500 21px/1.58 'Cormorant Garamond',serif;
+  }
+  .ornament{
+    position:relative;
+    margin:45px 0 0;
+    text-align:center;
+    color:var(--gold);
+    letter-spacing:.7em;
+  }
+  footer{
+    margin-top:46px;
+    text-align:center;
+    color:#cbb9d0;
+    font:italic 17px 'Cormorant Garamond',serif;
+  }
+  footer .sig{
+    display:block;
+    margin-top:8px;
+    color:var(--gold);
+    font:42px/1 'Pinyon Script',cursive;
+  }
+  @media (max-width:680px){
+    main{padding-top:44px}
+    .record-stage{
+      grid-template-columns:1fr;
+      text-align:center;
+      padding:24px 20px;
+    }
+    .disc{width:138px}
+    .lyrics-sheet{padding:46px 28px 58px}
+    .lyrics-sheet::before{inset:11px}
+    .section p{font-size:18px}
+    .section.chorus p{font-size:19px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .is-playing .disc{animation:none}
+  }
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a href="../index.html">← Volver a todas las cartas</a>
+</nav>
+
+<main>
+  <header class="hero">
+    <div class="eyebrow">Octava carta · Una canción para Karina</div>
+    <h1>Mujer Virtuosa <em>Te elegiría otra vez</em></h1>
+    <p class="dedication">Una canción nacida de nuestra historia, de tu fe y de todo lo que Dios ha hecho en ti. Para ti, mi amor.</p>
+  </header>
+
+  <section class="record-stage" aria-label="Reproductor de la canción Mujer Virtuosa">
+    <div class="disc" aria-hidden="true"></div>
+    <div class="player-copy">
+      <div class="small">Ahora suena</div>
+      <h2>Mujer Virtuosa</h2>
+      <p class="artist">Esdras para Karina · Creada con Treblo</p>
+      <audio id="song" controls autoplay preload="auto">
+        <source src="../uploads/mujer-virtuosa.ogg" type="audio/ogg; codecs=opus">
+        Tu navegador no puede reproducir este audio.
+      </audio>
+      <button class="play-hint" id="playHint" type="button">▶ Escuchar la canción</button>
+      <p class="status" id="status" aria-live="polite">Preparando la canción…</p>
+      <a class="download" href="../uploads/mujer-virtuosa.ogg" download>Descargar la canción</a>
+    </div>
+  </section>
+
+  <article class="lyrics-sheet">
+    <header class="lyrics-title">
+      <span>Letra</span>
+      <h2>Sobrepasas a todas</h2>
+    </header>
+
+    <section class="section">
+      <div class="section-label">Introducción</div>
+      <p>Karina…
+cuando miro tu vida,
+entiendo mejor lo que significa
+una mujer virtuosa.</p>
+    </section>
+
+    <section class="section">
+      <div class="section-label">Verso I</div>
+      <p>Desde aquel julio en Ñaña
+me habló tu sencillez;
+sin máscaras ni apariencias,
+tan transparente y fiel.
+
+Dios conocía mi vacío,
+te puso cerca de mí;
+tomé tu mano en aquel puente
+y ya no la pude soltar.</p>
+    </section>
+
+    <section class="section">
+      <div class="section-label">Pre-coro</div>
+      <p>Has sido calma en mi dolor,
+mi roca en la tempestad;
+cuando yo perdía las fuerzas,
+tú me ayudabas a avanzar.</p>
+    </section>
+
+    <section class="section chorus">
+      <div class="section-label">Coro</div>
+      <p>Muchas mujeres hicieron el bien,
+pero tú sobrepasas a todas.
+No por la belleza que el tiempo se lleva,
+sino por la gracia que tu alma revela.
+
+Mujer virtuosa, regalo de Dios,
+esposa y amiga, mi casa, mi amor.
+Karina, mi vida, mi compañera,
+te elegiría una y otra vez.</p>
+    </section>
+
+    <section class="section">
+      <div class="section-label">Verso II</div>
+      <p>Miro a Leitan y a Hadasa
+y veo tu amor crecer,
+en cada abrazo y consejo,
+en tu manera de creer.
+
+Aun cuando el cuerpo te duele,
+todavía sabes sonreír;
+sirves sin pedir aplausos,
+amas sin pensar en ti.</p>
+    </section>
+
+    <section class="section">
+      <div class="section-label">Pre-coro II</div>
+      <p>Cuando mi madre se fue,
+abrazaste mi corazón;
+en cada prueba de la vida,
+has peleado junto a mí.</p>
+    </section>
+
+    <section class="section chorus">
+      <div class="section-label">Coro</div>
+      <p>Muchas mujeres hicieron el bien,
+pero tú sobrepasas a todas.
+No por la belleza que el tiempo se lleva,
+sino por la gracia que tu alma revela.
+
+Mujer virtuosa, regalo de Dios,
+esposa y amiga, mi casa, mi amor.
+Karina, mi vida, mi compañera,
+te elegiría una y otra vez.</p>
+    </section>
+
+    <section class="section">
+      <div class="section-label">Puente</div>
+      <p>Dios sanó las heridas de tu historia,
+ninguna lágrima cayó en vano.
+Hoy estudias Psicología,
+el sueño que guardaste tantos años.
+
+Él te prepara para otras vidas,
+para jóvenes y hogares heridos;
+tu fe, tu experiencia y lo aprendido
+serán bálsamo en las manos de Dios.</p>
+    </section>
+
+    <section class="section chorus">
+      <div class="section-label">Coro final</div>
+      <p>Muchas mujeres hicieron el bien,
+pero tú sobrepasas a todas.
+La madre, la esposa, la amiga que ora,
+la mujer que sirve, perdona y transforma.
+
+Mujer virtuosa, regalo de Dios,
+mi compañera en la obra del Señor.
+Karina, mi vida, mi compañera,
+te elegiría una y otra vez.</p>
+    </section>
+
+    <section class="section">
+      <div class="section-label">Final</div>
+      <p>De aquel puente hasta el final,
+no soltaré nunca tu mano.
+
+Mi Karina,
+mi mujer virtuosa.
+
+Con todo mi amor,
+tu esposo.</p>
+    </section>
+
+    <div class="ornament">❦ · ♪ · ❦</div>
+  </article>
+
+  <footer>
+    Para Karina, con toda mi vida.
+    <span class="sig">Esdras</span>
+  </footer>
+</main>
+
+<script>
+  const player = document.getElementById('song');
+  const status = document.getElementById('status');
+  const playHint = document.getElementById('playHint');
+
+  function markPlaying(){
+    document.body.classList.add('is-playing');
+    document.body.classList.remove('autoplay-blocked');
+    status.textContent = 'Reproduciendo nuestra canción.';
+  }
+
+  function markPaused(){
+    document.body.classList.remove('is-playing');
+    if (player.currentTime > 0 && !player.ended) status.textContent = 'Canción en pausa.';
+  }
+
+  function tryToPlay(){
+    const attempt = player.play();
+    if (attempt && typeof attempt.catch === 'function'){
+      attempt.catch(function(){
+        document.body.classList.add('autoplay-blocked');
+        status.textContent = 'Tu navegador necesita que toques el botón para comenzar.';
+      });
+    }
+  }
+
+  player.addEventListener('play', markPlaying);
+  player.addEventListener('pause', markPaused);
+  player.addEventListener('ended', function(){
+    document.body.classList.remove('is-playing');
+    status.textContent = 'La canción terminó. Puedes volver a escucharla cuando quieras.';
+  });
+  player.addEventListener('canplay', function(){
+    if (player.paused) tryToPlay();
+  }, {once:true});
+  player.addEventListener('error', function(){
+    document.body.classList.add('autoplay-blocked');
+    status.textContent = 'No se pudo cargar automáticamente. Usa el enlace de descarga o vuelve a intentarlo.';
+  });
+  playHint.addEventListener('click', tryToPlay);
+  window.addEventListener('load', tryToPlay, {once:true});
+</script>
+</body>
+</html>
