@@ -612,6 +612,20 @@
       margin-top: 18px;
     }
   }
+
+  .anniversary-feature{margin:40px 0 56px}
+  .anniversary-card{grid-template-columns:100px 1fr;gap:28px;border-color:var(--gold);background:radial-gradient(ellipse at top right,rgba(212,181,114,.16),transparent 65%),linear-gradient(135deg,#452659,#231231);box-shadow:inset 0 3px 0 var(--gold),0 24px 60px rgba(0,0,0,.25)}
+  .anniversary-card .numeral{color:var(--gold)}
+  .anniversary-cta{grid-column:2;color:var(--gold);font-size:18px}
+  @media(max-width:720px){
+    .anniversary-feature{margin:24px 0}
+    .anniversary-card{display:block;padding:25px 22px}
+    .anniversary-card .numeral{font-size:66px;top:18px;right:20px;opacity:.3}
+    .anniversary-card .info .whisper{font-size:10px;margin-bottom:14px;padding-right:60px}
+    .anniversary-card .info h2{font-size:32px;max-width:310px}
+    .anniversary-card .info .opening{display:block;font-size:16px;margin-top:14px}
+    .anniversary-cta{display:block;margin-top:20px;font-size:16px}
+  }
 </style>
 </head>
 <body>
@@ -623,6 +637,18 @@
     <div class="eyebrow">Para ti, mi amor</div>
     <h1>Cartas para <em>Karina</em></h1>
     <p class="dedication">Aquí te iré guardando, con el tiempo, todo lo que el corazón me dicte escribirte. Ábrelas cuando quieras — todas son tuyas.</p>
+  </section>
+
+  <section class="anniversary-feature" aria-label="Nuestro aniversario">
+    <a class="letter-card anniversary-card" href="designs/07-aniversario.html">
+      <div class="numeral">14</div>
+      <div class="info">
+        <div class="whisper">Nuestro aniversario · Carta y video</div>
+        <h2>14 años contigo, <em>mi amada Karina</em></h2>
+        <p class="opening">«Hoy, al celebrar nuestro aniversario número 14, miro hacia atrás y pienso en todo lo que hemos vivido…»</p>
+      </div>
+      <span class="anniversary-cta">Leer la carta y ver nuestro video →</span>
+    </a>
   </section>
 
   <div class="divider">❦ · ❦ · ❦</div>
@@ -700,15 +726,7 @@
       <div class="arrow">→</div>
     </a>
 
-    <a class="letter-card" href="designs/07-aniversario.html">
-      <div class="numeral">VI</div>
-      <div class="info">
-        <div class="whisper">14 años de matrimonio · Nuestra historia</div>
-        <h2>Mi amada, <em>Karina</em></h2>
-        <p class="opening">«Hoy, al celebrar nuestro aniversario número 14, miro hacia atrás y pienso en todo lo que hemos vivido…»</p>
-      </div>
-      <div class="arrow">→</div>
-    </a>
+
 
     <a class="letter-card" href="designs/08-psicologia.html">
       <div class="numeral">VII</div>
