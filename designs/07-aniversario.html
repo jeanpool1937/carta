@@ -204,7 +204,7 @@
     background:#160d20;
     box-shadow:0 12px 30px rgba(42,26,58,.14);
   }
-  .video-frame iframe{
+  .video-frame video{
     display:block;
     width:100%;
     height:100%;
@@ -380,15 +380,12 @@
   <section class="video-tribute" aria-labelledby="video-tribute-label">
     <div class="video-tribute-label" id="video-tribute-label">Nuestro video de aniversario</div>
     <div class="video-frame">
-      <iframe
-        src="https://drive.google.com/file/d/1J42CutV_7pLRQn1QKnXFb-XkgevDihZ5/preview"
-        title="Video de aniversario de Karina y Esdras"
-        allow="autoplay; fullscreen; picture-in-picture"
-        allowfullscreen
-        loading="lazy"
-        referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      <video controls playsinline preload="metadata" aria-label="Video de aniversario de Karina y Esdras">
+        <source src="https://vwivfyfkrzntpydeqtrg.supabase.co/storage/v1/object/public/aniversario-14-anos/2026/video-aniversario-karina-esdras-14-anos.mp4" type="video/mp4">
+        Tu navegador no puede reproducir el video. Puedes abrirlo con el enlace de abajo.
+      </video>
     </div>
-    <a class="video-link" href="https://drive.google.com/file/d/1J42CutV_7pLRQn1QKnXFb-XkgevDihZ5/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">Abrir el video en Google Drive</a>
+    <a class="video-link" href="https://vwivfyfkrzntpydeqtrg.supabase.co/storage/v1/object/public/aniversario-14-anos/2026/video-aniversario-karina-esdras-14-anos.mp4" target="_blank" rel="noopener noreferrer">Abrir nuestro video</a>
   </section>
 
   <p class="letter">Hoy, al celebrar nuestro aniversario número 14, miro hacia atrás y pienso en todo lo que hemos vivido. En realidad, ya son muchos más años caminando juntos, y todavía sigues aquí, a mi lado. Para mí, eso es algo hermoso, porque habla mucho de quién eres: de tu valor, de tu fidelidad y de ese corazón que no abandona fácilmente a las personas que ama.</p>
