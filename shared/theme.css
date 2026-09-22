@@ -85,6 +85,7 @@ html[data-theme="light"] .book::before {opacity:.15}
 html[data-theme="dark"] .petals-layer {opacity:.3}
 body.video-open :is(.appearance-control,.nav,.back,.petals-layer) {visibility:hidden}
 @media(max-width:720px) {
+  html[data-theme] .back {max-width:calc(100vw - 205px);text-align:center;font-size:12px;padding:8px 10px}
   html[data-theme] body:has(>.envelope) {padding:88px 16px 56px}
   html[data-theme] body:has(>main>.hero)>main {padding-top:88px}
   html[data-theme] .envelope {margin-bottom:100px}
