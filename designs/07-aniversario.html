@@ -220,6 +220,17 @@
     object-fit:contain;
     background:#000;
   }
+  .video-frame.is-expanded{
+    position:fixed;inset:0;z-index:99999;width:100vw;height:100dvh;
+    aspect-ratio:auto;border:0;background:#000;
+  }
+  body.video-open{overflow:hidden}
+  .video-close{display:none}
+  .video-frame.is-expanded .video-close{
+    display:block;position:absolute;top:16px;right:16px;z-index:3;
+    padding:10px 16px;border:1px solid #fff8;border-radius:24px;
+    background:#000a;color:#fff;font-size:16px;cursor:pointer;
+  }
   .video-start{
     position:absolute;
     inset:0;
@@ -448,6 +459,7 @@
         <source src="https://vwivfyfkrzntpydeqtrg.supabase.co/storage/v1/object/public/aniversario-14-anos/2026/video-aniversario-karina-esdras-14-anos-hadasa.mp4" type="video/mp4">
         Tu navegador no puede reproducir el video. Puedes abrirlo con el enlace de abajo.
       </video>
+      <button class="video-close" id="anniversary-close" type="button" aria-label="Cerrar pantalla completa">Cerrar ✕</button>
       <button class="video-start" id="anniversary-play" type="button" aria-label="Reproducir el video de aniversario en pantalla completa">
         <span class="video-play-icon" aria-hidden="true"></span>
         <span>Reproducir en pantalla completa</span>
@@ -566,7 +578,22 @@
   const anniversaryVideo = document.getElementById('anniversary-video');
   const anniversaryPlay = document.getElementById('anniversary-play');
 
+  const anniversaryFrame = anniversaryVideo.parentElement;
+  const closeAnniversary = () => {
+    anniversaryVideo.pause();
+    anniversaryFrame.classList.remove('is-expanded');
+    document.body.classList.remove('video-open');
+    anniversaryVideo.controls = false;
+    anniversaryPlay.hidden = false;
+  };
+  document.getElementById('anniversary-close').addEventListener('click', closeAnniversary);
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') closeAnniversary();
+  });
+
   anniversaryPlay.addEventListener('click', () => {
+    anniversaryFrame.classList.add('is-expanded');
+    document.body.classList.add('video-open');
     anniversaryPlay.hidden = true;
     anniversaryVideo.controls = true;
 
@@ -581,10 +608,7 @@
       } catch {}
     }
 
-    anniversaryVideo.play().catch(() => {
-      anniversaryVideo.controls = false;
-      anniversaryPlay.hidden = false;
-    });
+    anniversaryVideo.play().catch(closeAnniversary);
   });
 
   const restoreAnniversaryPlayButton = () => {
@@ -594,9 +618,9 @@
     }
   };
 
-  anniversaryVideo.addEventListener('webkitendfullscreen', restoreAnniversaryPlayButton);
+  anniversaryVideo.addEventListener('webkitendfullscreen', closeAnniversary);
   document.addEventListener('fullscreenchange', () => {
-    if (!document.fullscreenElement) restoreAnniversaryPlayButton();
+    if (!document.fullscreenElement) closeAnniversary();
   });
 </script>
 
