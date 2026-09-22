@@ -197,6 +197,7 @@
     text-transform:uppercase;
   }
   .video-frame{
+    position:relative;
     width:100%;
     aspect-ratio:16 / 9;
     overflow:hidden;
@@ -209,6 +210,69 @@
     width:100%;
     height:100%;
     border:0;
+    background:#000;
+    object-fit:contain;
+  }
+  .video-frame video:fullscreen,
+  .video-frame video:-webkit-full-screen{
+    width:100vw;
+    height:100vh;
+    object-fit:contain;
+    background:#000;
+  }
+  .video-start{
+    position:absolute;
+    inset:0;
+    z-index:2;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:13px;
+    width:100%;
+    border:0;
+    background:rgba(15,8,18,.24);
+    color:#fbf6ee;
+    cursor:pointer;
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(18px,2.8vw,25px);
+    letter-spacing:.04em;
+    transition:background .25s;
+  }
+  .video-start:hover{background:rgba(15,8,18,.42)}
+  .video-start[hidden]{display:none}
+  .video-play-icon{
+    display:grid;
+    width:72px;
+    height:72px;
+    place-items:center;
+    border:1px solid rgba(220,207,163,.82);
+    border-radius:50%;
+    background:rgba(20,13,24,.64);
+    box-shadow:0 8px 24px rgba(0,0,0,.32);
+    transition:transform .25s,background .25s;
+  }
+  .video-start:hover .video-play-icon{
+    transform:scale(1.07);
+    background:rgba(74,37,102,.78);
+  }
+  .video-play-icon::before{
+    content:"";
+    width:0;
+    height:0;
+    margin-left:5px;
+    border-top:12px solid transparent;
+    border-bottom:12px solid transparent;
+    border-left:19px solid #e4d4aa;
+  }
+  @media(max-width:720px){
+    .video-start{font-size:17px;gap:9px}
+    .video-play-icon{width:58px;height:58px}
+    .video-play-icon::before{
+      border-top-width:10px;
+      border-bottom-width:10px;
+      border-left-width:16px;
+    }
   }
   .video-link{
     display:inline-block;
@@ -380,10 +444,14 @@
   <section class="video-tribute" aria-labelledby="video-tribute-label">
     <div class="video-tribute-label" id="video-tribute-label">Nuestro video de aniversario</div>
     <div class="video-frame">
-      <video controls playsinline preload="metadata" aria-label="Video de aniversario de Karina y Esdras">
+      <video id="anniversary-video" playsinline preload="metadata" aria-label="Video de aniversario de Karina y Esdras">
         <source src="https://vwivfyfkrzntpydeqtrg.supabase.co/storage/v1/object/public/aniversario-14-anos/2026/video-aniversario-karina-esdras-14-anos.mp4" type="video/mp4">
         Tu navegador no puede reproducir el video. Puedes abrirlo con el enlace de abajo.
       </video>
+      <button class="video-start" id="anniversary-play" type="button" aria-label="Reproducir el video de aniversario en pantalla completa">
+        <span class="video-play-icon" aria-hidden="true"></span>
+        <span>Reproducir en pantalla completa</span>
+      </button>
     </div>
     <a class="video-link" href="https://vwivfyfkrzntpydeqtrg.supabase.co/storage/v1/object/public/aniversario-14-anos/2026/video-aniversario-karina-esdras-14-anos.mp4" target="_blank" rel="noopener noreferrer">Abrir nuestro video</a>
   </section>
@@ -402,14 +470,14 @@
   <p class="letter">A los seis años de casados quedamos embarazados de Hadasa, y en el año 2020 nació nuestra niña pandemia.</p>
   <p class="letter">Qué etapa tan especial fue aquella.</p>
   <p class="letter">La pandemia fue un tiempo difícil para el mundo, pero cuando recuerdo esos meses, también recuerdo algo muy hermoso para nosotros. Normalmente nuestra vida siempre está llena de responsabilidades, trabajo, estudios, compromisos y actividades que muchas veces nos mantienen fuera de casa. Pero en aquella etapa ocurrió algo diferente: estuvimos encerrados, sí, pero estuvimos juntos.</p>
-  <p class="letter">Y pudimos ver crecer a Hada prácticamente día a día.</p>
+  <p class="letter">Y pudimos ver crecer a Hadasa prácticamente día a día.</p>
   <p class="letter">Pudimos disfrutar sus primeros meses de una manera que probablemente, en circunstancias normales, no hubiéramos podido vivir con tanta intensidad. Fue nuestra pequeña compañera durante aquel tiempo extraño del mundo.</p>
   <p class="letter">Y cuando pienso en la pandemia, no solamente recuerdo el encierro.</p>
   <p class="letter">Recuerdo nuestra casa.</p>
   <p class="letter">Recuerdo a nuestros hijos.</p>
   <p class="letter">Recuerdo estar contigo.</p>
   <p class="letter">Recuerdo que nos amamos más.</p>
-  <p class="letter">Fue una etapa muy hermosa para nosotros, una especie de pausa en medio de tantos años corriendo de un lugar a otro. Dios permitió que durante un tiempo pudiéramos simplemente estar juntos, compartir, cuidar de nuestra familia y disfrutar el crecimiento de nuestra pequeña Hanna.</p>
+  <p class="letter">Fue una etapa muy hermosa para nosotros, una especie de pausa en medio de tantos años corriendo de un lugar a otro. Dios permitió que durante un tiempo pudiéramos simplemente estar juntos, compartir, cuidar de nuestra familia y disfrutar el crecimiento de nuestra pequeña Hadasa.</p>
   <p class="letter">Y por eso también quiero darte las gracias.</p>
   <p class="letter">Gracias por esos días.</p>
   <p class="letter">Gracias por aquella etapa.</p>
@@ -493,6 +561,42 @@
     count: 22,
     colors: ['#b99ac9', '#d9bfe2', '#e8d5ef', '#6b3a8a', '#c9a8d4'],
     zIndex: 3
+  });
+
+  const anniversaryVideo = document.getElementById('anniversary-video');
+  const anniversaryPlay = document.getElementById('anniversary-play');
+
+  anniversaryPlay.addEventListener('click', () => {
+    anniversaryPlay.hidden = true;
+    anniversaryVideo.controls = true;
+
+    if (typeof anniversaryVideo.webkitEnterFullscreen === 'function') {
+      try { anniversaryVideo.webkitEnterFullscreen(); } catch {}
+    } else if (typeof anniversaryVideo.requestFullscreen === 'function') {
+      try {
+        const fullscreenRequest = anniversaryVideo.requestFullscreen();
+        if (fullscreenRequest && typeof fullscreenRequest.catch === 'function') {
+          fullscreenRequest.catch(() => {});
+        }
+      } catch {}
+    }
+
+    anniversaryVideo.play().catch(() => {
+      anniversaryVideo.controls = false;
+      anniversaryPlay.hidden = false;
+    });
+  });
+
+  const restoreAnniversaryPlayButton = () => {
+    if (anniversaryVideo.paused) {
+      anniversaryVideo.controls = false;
+      anniversaryPlay.hidden = false;
+    }
+  };
+
+  anniversaryVideo.addEventListener('webkitendfullscreen', restoreAnniversaryPlayButton);
+  document.addEventListener('fullscreenchange', () => {
+    if (!document.fullscreenElement) restoreAnniversaryPlayButton();
   });
 </script>
 
