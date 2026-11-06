@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<script src="../shared/theme.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Una carta de agradecimiento de Esdras para Karina: un pequeño regalo para que se consienta y disfrute.">
+<meta name="theme-color" content="#171020">
+<title>Un regalo solo para ti · De Esdras para Karina</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;min-height:100vh;overflow-x:hidden;font-family:'EB Garamond',serif}
+  .back{position:fixed;z-index:10;top:max(14px,env(safe-area-inset-top));left:max(14px,env(safe-area-inset-left));text-decoration:none}
+  main{position:relative;width:min(100% - 28px,780px);margin:0 auto;padding:102px 0 max(65px,env(safe-area-inset-bottom))}
+  .eyebrow{text-align:center;color:var(--metal);font:italic 12px 'EB Garamond',serif;letter-spacing:.22em;text-transform:uppercase;margin:0 0 18px}
+  .lead{text-align:center;max-width:550px;margin:0 auto 36px;color:var(--muted);font:italic clamp(18px,3vw,22px)/1.45 'Cormorant Garamond',serif}
+  .letter-paper{position:relative;overflow:hidden;padding:clamp(30px,7vw,76px);background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow)}
+  .letter-paper::before{content:"❦";position:absolute;right:-6px;top:-48px;color:var(--border);font:220px/1 'Pinyon Script',cursive;pointer-events:none}
+  .metadata{position:relative;display:flex;justify-content:space-between;align-items:end;gap:16px;padding-bottom:24px;border-bottom:1px solid var(--border)}
+  .metadata .to{color:var(--metal);font:500 11px system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase}
+  .metadata strong{display:block;margin-top:8px;color:var(--text);font:400 27px/1.1 'Cormorant Garamond',serif}
+  .metadata time{color:var(--muted);font:italic 14px 'Cormorant Garamond',serif;text-align:right;white-space:nowrap}
+  h1{position:relative;color:var(--text);font:300 clamp(47px,9vw,76px)/.96 'Cormorant Garamond',serif;letter-spacing:-.035em;margin:40px 0 36px;max-width:600px;text-wrap:balance}
+  h1 em{display:block;color:var(--accent);font:normal .9em/1.08 'Pinyon Script',cursive;letter-spacing:0;margin-top:5px}
+  .prose{position:relative;max-width:580px;margin:0 auto;color:var(--text)}
+  .prose p{font:400 clamp(20px,2.8vw,23px)/1.55 'Cormorant Garamond',serif;margin:0 0 23px;text-wrap:pretty}
+  .prose p:first-child{font-size:clamp(25px,4vw,31px)}
+  .prose strong{font-weight:500;color:var(--accent-strong)}
+  .gift{position:relative;max-width:445px;margin:38px auto;padding:28px 20px 30px;text-align:center;color:var(--text);border:1px solid var(--border);background:var(--surface-soft);box-shadow:0 14px 34px rgba(0,0,0,.06)}
+  .gift:before,.gift:after{content:"";position:absolute;left:50%;transform:translateX(-50%);width:55px;height:1px;background:var(--metal)}
+  .gift:before{top:16px}.gift:after{bottom:17px}
+  .gift .heart{color:var(--accent);font-size:22px;line-height:1}
+  .gift .gift-label{font:500 10px system-ui,sans-serif;color:var(--metal);text-transform:uppercase;letter-spacing:.22em;margin-top:10px}
+  .gift .amount{font:400 clamp(60px,12vw,83px)/1 'Cormorant Garamond',serif;letter-spacing:-.05em;color:var(--text);margin:7px 0}
+  .gift .amount small{font:400 .42em 'Cormorant Garamond',serif;letter-spacing:0;vertical-align:top;position:relative;top:.25em}
+  .gift .for-you{font:italic 20px 'Cormorant Garamond',serif;color:var(--muted)}
+  .closing{position:relative;margin-top:43px;padding-top:27px;border-top:1px solid var(--border);color:var(--muted);font:italic 18px 'Cormorant Garamond',serif}
+  .signature{display:block;margin-top:10px;color:var(--accent);font:50px/1 'Pinyon Script',cursive}
+  .endnote{text-align:center;color:var(--muted);font:italic 17px 'Cormorant Garamond',serif;margin:28px 0 0}
+  @media(max-width:620px){
+    main{width:min(100% - 20px,520px);padding-top:88px}
+    .eyebrow{font-size:10px;margin-bottom:12px}
+    .lead{font-size:17px;margin-bottom:20px}
+    .letter-paper{padding:34px 22px 40px}
+    .metadata{align-items:start;flex-direction:column;gap:6px;padding-bottom:18px}
+    .metadata strong{font-size:23px}
+    .metadata time{text-align:left}
+    h1{margin:28px 0 24px;font-size:clamp(43px,13vw,66px)}
+    .prose p{font-size:20px;margin-bottom:19px}
+    .prose p:first-child{font-size:26px}
+    .gift{margin:28px 0;padding:28px 14px}
+    .signature{font-size:46px}
+    .endnote{font-size:15px}
+  }
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+<link rel="stylesheet" href="../shared/theme.css">
+</head>
+<body>
+<a class="back" href="../index.html#para-karina" aria-label="Volver a las cartas">← Todas las cartas</a>
+<main>
+  <div class="eyebrow">De Esdras para Karina · Novena carta</div>
+  <p class="lead">Hay regalos que se envuelven en papel, y otros que nacen de un corazón agradecido.</p>
+  <article class="letter-paper" aria-labelledby="letter-title">
+    <header class="metadata">
+      <div><span class="to">Para</span><strong>Mi amada Karina</strong></div>
+      <time datetime="2026-11-06">6 de noviembre de 2026</time>
+    </header>
+    <h1 id="letter-title">Un regalo <em>solo para ti</em></h1>
+    <div class="prose">
+      <p>Amor mío,</p>
+      <p>Hoy no he tenido tiempo de comprarte un arreglo o un detalle especial, pero quiero regalarte algo que vaya acompañado de todo mi amor, reconocimiento y gratitud por ti.</p>
+      <p>Sé cuánto te esfuerzas cada día por nuestra familia, cuánto entregas de ti y cuántas veces dejas tus propios deseos para después. Por eso, hoy quiero que pienses solamente en ti. ❤️</p>
+      <p>Te he enviado <strong>S/ 100 por Yape</strong>, no para la casa, ni para los niños, ni para alguna responsabilidad. <strong>Es exclusivamente para ti</strong>, para que te compres algo que te guste, que te ilusione y que te haga feliz.</p>
+      <div class="gift" aria-label="Un regalo de cien soles, solo para Karina">
+        <div class="heart" aria-hidden="true">♡</div>
+        <div class="gift-label">Un pequeño regalo para ti</div>
+        <div class="amount"><small>S/</small> 100</div>
+        <div class="for-you">Para lo que tú desees, mi amor</div>
+      </div>
+      <!-- Cuando se reciba el comprobante de Yape, agregar aquí la imagen revisada
+           para ocultar cualquier dato financiero personal que no deba hacerse público. -->
+      <p>Quiero verte sonreír, relajarte y disfrutar de un pequeño gusto sin preocuparte por nada. Te mereces mucho más que esto, mi amor, pero quiero que este detalle te recuerde cuánto te valoro y lo agradecido que estoy con Dios por tenerte a mi lado.</p>
+      <p>Así que date un respiro, consiéntete y disfruta de tu autorregalo. Y cuando lo hagas, recuerda que detrás de ese pequeño detalle hay un esposo que te ama muchísimo y que desea verte siempre feliz. 🥰</p>
+      <p><strong>Te amo, mi hermosa Karina. ❤️😘</strong></p>
+    </div>
+    <footer class="closing">Con todo mi amor,<span class="signature">Esdras</span></footer>
+  </article>
+  <p class="endnote">Porque también mereces que alguien te cuide a ti. ♡</p>
+</main>
+</body>
+</html>
