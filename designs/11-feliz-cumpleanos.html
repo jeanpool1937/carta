@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<script src="../shared/theme.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Una carta de cumpleaños de Esdras para Karina.">
+<meta name="theme-color" content="#171020">
+<title>Feliz cumpleaños, mi amor · De Esdras para Karina</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;min-height:100vh;overflow-x:hidden;font-family:'EB Garamond',serif}
+  .back{position:fixed;z-index:10;top:max(14px,env(safe-area-inset-top));left:max(14px,env(safe-area-inset-left));text-decoration:none}
+  main{position:relative;width:min(100% - 28px,780px);margin:0 auto;padding:102px 0 max(65px,env(safe-area-inset-bottom))}
+  .eyebrow{text-align:center;color:var(--metal);font:italic 12px 'EB Garamond',serif;letter-spacing:.22em;text-transform:uppercase;margin:0 0 18px}
+  .lead{text-align:center;max-width:550px;margin:0 auto 36px;color:var(--muted);font:italic clamp(18px,3vw,22px)/1.45 'Cormorant Garamond',serif}
+  .letter-paper{position:relative;overflow:hidden;padding:clamp(30px,7vw,76px);background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow)}
+  .letter-paper::before{content:"❦";position:absolute;right:-6px;top:-48px;color:var(--border);font:220px/1 'Pinyon Script',cursive;pointer-events:none}
+  .metadata{position:relative;display:flex;justify-content:space-between;align-items:end;gap:16px;padding-bottom:24px;border-bottom:1px solid var(--border)}
+  .metadata .to{color:var(--metal);font:500 11px system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase}
+  .metadata strong{display:block;margin-top:8px;color:var(--text);font:400 27px/1.1 'Cormorant Garamond',serif}
+  .metadata time{color:var(--muted);font:italic 14px 'Cormorant Garamond',serif;text-align:right;white-space:nowrap}
+  h1{position:relative;color:var(--text);font:300 clamp(47px,9vw,76px)/.96 'Cormorant Garamond',serif;letter-spacing:-.035em;margin:40px 0 36px;max-width:600px;text-wrap:balance}
+  h1 em{display:block;color:var(--accent);font:normal .9em/1.08 'Pinyon Script',cursive;letter-spacing:0;margin-top:5px}
+  .prose{position:relative;max-width:580px;margin:0 auto;color:var(--text)}
+  .prose p{font:400 clamp(20px,2.8vw,23px)/1.55 'Cormorant Garamond',serif;margin:0 0 23px;text-wrap:pretty}
+  .prose p:first-child{font-size:clamp(25px,4vw,31px)}
+  .prose strong{font-weight:500;color:var(--accent-strong)}
+  .closing{position:relative;margin-top:43px;padding-top:27px;border-top:1px solid var(--border);color:var(--muted);font:italic 18px 'Cormorant Garamond',serif}
+  .signature{display:block;margin-top:10px;color:var(--accent);font:50px/1 'Pinyon Script',cursive}
+  .endnote{text-align:center;color:var(--muted);font:italic 17px 'Cormorant Garamond',serif;margin:28px 0 0}
+  @media(max-width:620px){
+    main{width:min(100% - 20px,520px);padding-top:88px}
+    .eyebrow{font-size:10px;margin-bottom:12px}
+    .lead{font-size:17px;margin-bottom:20px}
+    .letter-paper{padding:34px 22px 40px}
+    .metadata{align-items:start;flex-direction:column;gap:6px;padding-bottom:18px}
+    .metadata strong{font-size:23px}
+    .metadata time{text-align:left}
+    h1{margin:28px 0 24px;font-size:clamp(43px,13vw,66px)}
+    .prose p{font-size:20px;margin-bottom:19px}
+    .prose p:first-child{font-size:26px}
+    .signature{font-size:46px}
+    .endnote{font-size:15px}
+  }
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  .letter-paper{border-radius:18px}
+  .prose h2{font:500 clamp(25px,4.8vw,35px)/1.18 'Cormorant Garamond',serif;color:var(--accent-strong);margin:42px 0 17px;padding-top:23px;border-top:1px solid var(--border);text-wrap:balance}
+  .prose .scripture{margin:26px 0 30px;padding:18px 20px;border-inline-start:2px solid var(--metal);background:var(--surface-soft);border-radius:0 12px 12px 0;break-inside:avoid}
+  .prose .scripture p{font:italic 400 clamp(19px,3vw,23px)/1.5 'EB Garamond',serif;margin:0 0 10px;color:var(--text)}
+  .scripture cite{display:block;color:var(--metal);font:500 13px/1.4 system-ui,sans-serif;font-style:normal}
+  .prose .celebration{padding:18px 0;color:var(--accent-strong);line-height:1.7}
+  .prose .emphasis{color:var(--accent-strong);font-size:clamp(23px,4vw,30px)}
+  .prose .signature{font:400 clamp(35px,8vw,50px)/1.2 'Pinyon Script',cursive;color:var(--accent);margin:24px 0 0}
+  .birthday-heart{font:normal .43em/1.3 system-ui,sans-serif;vertical-align:middle}
+  @media(max-width:620px){.prose h2{margin-top:34px;padding-top:18px}.prose .scripture{padding:15px 14px;margin:22px 0}.letter-paper{padding-inline:clamp(17px,5vw,26px)}}
+  @media(max-width:360px){.prose p{font-size:19px}}
+</style>
+<link rel="stylesheet" href="../shared/theme.css">
+</head>
+<body>
+<a class="back" href="../index.html#para-karina" aria-label="Volver a las cartas">← Todas las cartas</a>
+<main>
+  <div class="eyebrow">De Esdras para Karina · Décima carta</div>
+  <article class="letter-paper" aria-labelledby="letter-title">
+    <header class="metadata">
+      <div><span class="to">Para</span><strong>Mi amada Karina</strong></div>
+      <time datetime="2026-11-30">30 de noviembre de 2026</time>
+    </header>
+    <h1 id="letter-title">Feliz cumpleaños, <em>mi amor <span class="birthday-heart">❤️</span></em></h1>
+    <div class="prose">
+      <p>Hoy quiero celebrar tu vida, pero también quiero celebrar la maravillosa mujer que eres y el privilegio que Dios me ha concedido de ser tu esposo.</p>
+      <h2>Te veo, te valoro y te admiro.</h2>
+      <p>He visto tu cansancio por las responsabilidades del hogar, las tareas de nuestros hijos y las exigencias de la universidad. He visto cómo, a pesar de tener tantas responsabilidades, sigues adelante. Admiro tu esfuerzo, tu empeño, tu destreza y esa admirable determinación que tienes de hacer las cosas bien, con esmero y excelencia.</p>
+      <p>Recuerdo cuando te dijeron que la maqueta de Hadasa estaba demasiado simple. En lugar de desanimarte, decidiste ponerle aún más empeño y hacer una mucho mejor. No escogiste el camino fácil de comprarla o dejar que alguien más la hiciera. Asumiste el desafío y demostraste de lo que eres capaz.</p>
+      <p>Quizás para otros solo fue una maqueta, pero para mí fue una demostración de tu carácter. Esa capacidad de superar las dificultades, aprender y buscar siempre la excelencia es una de las cualidades que hacen de ti una gran líder.</p>
+      <blockquote class="scripture"><p><em>«Muchas mujeres hicieron el bien; mas tú sobrepasas a todas».</em></p><cite>— Proverbios 31:29</cite></blockquote>
+      <h2>Admiro tu perseverancia.</h2>
+      <p>Muchas veces veo el cansancio reflejado en tus ojos, pero también veo en ellos la determinación de una mujer que no se rinde. Una mujer que, aun cuando las fuerzas parecen agotarse, encuentra motivos para seguir adelante.</p>
+      <p>Esa perseverancia también la he experimentado en nuestro matrimonio. Gracias por continuar a mi lado a pesar de mis errores, mis imperfecciones y todas aquellas cosas en las que todavía necesito mejorar. Gracias por tu paciencia, por tu comprensión y por seguir construyendo conmigo nuestra familia.</p>
+      <p>No quiero solamente agradecerte por permanecer a mi lado; quiero esforzarme cada día por ser un mejor esposo, por compartir tus cargas y por cuidar tu corazón.</p>
+      <blockquote class="scripture"><p><em>«Mejores son dos que uno; porque tienen mejor paga de su trabajo. Porque si cayeren, el uno levantará a su compañero».</em></p><cite>— Eclesiastés 4:9-10</cite></blockquote>
+      <p>Quiero ser ese compañero que te levante cuando estés cansada, que te fortalezca cuando te falten las fuerzas y que camine contigo en cada etapa de tu vida.</p>
+      <h2>Admiro tu belleza.</h2>
+      <p>Cuando fuimos al quinceañero de Anyela, deslumbraste con aquel vestido verde. ¡Qué hermosa te veías! Me sentí orgulloso y feliz de tenerte a mi lado.</p>
+      <p>Me encanta mirarte, me gusta ser tu esposo y me sigue emocionando saber que eres la mujer con quien comparto mi vida.</p>
+      <p>Admiro tu belleza, tu inteligencia, tu personalidad y esa manera tan especial que tienes de enfrentar la vida. Los años no han disminuido mi admiración por ti; al contrario, me han dado más razones para enamorarme de ti.</p>
+      <blockquote class="scripture"><p><em>«Toda tú eres hermosa, amiga mía, y en ti no hay mancha».</em></p><cite>— Cantares 4:7</cite></blockquote>
+      <h2>Admiro la grandeza de tu corazón.</h2>
+      <p>A pesar de estar al límite de tus fuerzas y de tener tantas responsabilidades pendientes, encontraste tiempo para visitar a Daleska.</p>
+      <p>Ese gesto me permitió ver, una vez más, la nobleza de tu corazón. Incluso cuando tienes tus propias necesidades, eres capaz de detenerte y mirar las necesidades de los demás.</p>
+      <p>Eso demuestra humildad, sensibilidad, generosidad y, sobre todo, un corazón dispuesto a servir. Son cualidades que reflejan el carácter de Cristo.</p>
+      <blockquote class="scripture"><p><em>«No mirando cada uno por lo suyo propio, sino cada cual también por lo de los otros».</em></p><cite>— Filipenses 2:4</cite></blockquote>
+      <blockquote class="scripture"><p><em>«Abre su boca con sabiduría, y la ley de clemencia está en su lengua».</em></p><cite>— Proverbios 31:26</cite></blockquote>
+      <p>Estoy convencido de que Dios ve cada uno de esos actos de amor, incluso aquellos que pasan desapercibidos para los demás.</p>
+      <blockquote class="scripture"><p><em>«Porque Dios no es injusto para olvidar vuestra obra y el trabajo de amor que habéis mostrado hacia su nombre».</em></p><cite>— Hebreos 6:10</cite></blockquote>
+      <h2>Pero hoy también quiero recordarte algo, mi amor: no tienes que ser fuerte todo el tiempo.</h2>
+      <p>No necesitas tener todo bajo control ni hacer todas las cosas perfectamente. Tu valor no depende de cuánto haces, de cuántas responsabilidades cumples o de cuántos problemas logras resolver.</p>
+      <p>Eres profundamente amada por Dios y por mí, no solamente por lo que haces, sino por quien eres.</p>
+      <p>También mereces descansar, ser cuidada, recibir ayuda y disfrutar de todo aquello que Dios ha preparado para ti.</p>
+      <p>Cuando sientas que tus fuerzas se agotan, recuerda esta promesa:</p>
+      <blockquote class="scripture"><p><em>«Él da esfuerzo al cansado, y multiplica las fuerzas al que no tiene ningunas».</em></p><cite>— Isaías 40:29</cite></blockquote>
+      <p>Y cuando las preocupaciones sean demasiado grandes, recuerda las palabras de nuestro Señor Jesús:</p>
+      <blockquote class="scripture"><p><em>«Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar».</em></p><cite>— Mateo 11:28</cite></blockquote>
+      <p>Mi deseo es que nunca olvides que no estás sola. Dios está contigo y yo quiero estar a tu lado, no solamente para disfrutar de tus victorias, sino también para ayudarte a llevar tus cargas.</p>
+      <h2>Mi oración por ti en este nuevo año de vida</h2>
+      <p>Le pido a Dios que renueve tus fuerzas, que llene tu corazón de paz, que fortalezca tu salud, que te conceda sabiduría en tus estudios y que bendiga cada uno de tus proyectos.</p>
+      <p>Que puedas ver el fruto de todo aquello que hoy estás sembrando con tanto esfuerzo.</p>
+      <blockquote class="scripture"><p><em>«Los que sembraron con lágrimas, con regocijo segarán».</em></p><cite>— Salmos 126:5</cite></blockquote>
+      <blockquote class="scripture"><p><em>«No nos cansemos, pues, de hacer bien; porque a su tiempo segaremos, si no desmayamos».</em></p><cite>— Gálatas 6:9</cite></blockquote>
+      <p>Oro para que Dios te permita descubrir nuevas capacidades, alcanzar tus sueños y seguir desarrollando todos los talentos que ha depositado en ti.</p>
+      <p>Que su presencia sea tu refugio, su Palabra tu dirección y su amor tu mayor seguridad.</p>
+      <blockquote class="scripture"><p><em>«Jehová te bendiga, y te guarde; Jehová haga resplandecer su rostro sobre ti, y tenga de ti misericordia; Jehová alce sobre ti su rostro, y ponga en ti paz».</em></p><cite>— Números 6:24-26</cite></blockquote>
+      <h2>Gracias por ser tú.</h2>
+      <p>Gracias por ser una madre maravillosa, una esposa admirable, una mujer inteligente, una mujer perseverante y una sierva de Dios con un corazón generoso.</p>
+      <p>Gracias por cada esfuerzo silencioso, por cada sacrificio, por cada noche de cansancio y por cada expresión de amor hacia nuestra familia.</p>
+      <p>Quiero que sepas que, detrás de todas esas responsabilidades que desempeñas, hay una mujer extraordinaria a quien amo profundamente y a quien deseo ver feliz, realizada y plena.</p>
+      <p>Si algo quiero que recuerdes de estas palabras, es que no solo te amo por todo lo que haces por nosotros. Te amo por quien eres.</p>
+      <p class="celebration">Celebro tu vida.<br>Celebro tus sueños.<br>Celebro tu corazón.<br>Celebro cada etapa de tu crecimiento.<br>Y, sobre todo, celebro que Dios haya unido nuestras vidas.</p>
+      <blockquote class="scripture"><p><em>«Las muchas aguas no podrán apagar el amor, ni lo ahogarán los ríos».</em></p><cite>— Cantares 8:7</cite></blockquote>
+      <p>Me siento bendecido de compartir mi vida contigo. Y si tuviera que volver a escoger a la mujer con quien caminar, construir una familia y envejecer, volvería a escogerte a ti.</p>
+      <p class="emphasis"><strong>Feliz cumpleaños, mi hermosa Karina.</strong></p>
+      <p>Te amo, te admiro y me enamoro cada día más de ti.</p>
+      <p>Que Dios me conceda muchos años más para celebrar tu vida, contemplar tu belleza, acompañar tus sueños y demostrarte con mis acciones cuánto significas para mí.</p>
+      <p class="emphasis"><strong>Con todo mi amor, hoy y siempre.</strong></p>
+      <p class="signature">Tu esposo. ❤️</p>
+    </div>
+  </article>
+</main>
+</body>
+</html>
